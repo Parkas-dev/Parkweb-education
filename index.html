@@ -3,64 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parkweb Education - منصة طالب البكالوريا</title>
+  <title>Parkweb Education - منصة طالب البكالوريا الشاملة</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Cairo', sans-serif; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
 
-  <!-- Auth Modal (نافذة التسجيل) -->
-  <div id="authModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl border border-slate-100 max-w-md w-full p-6 text-center">
-      <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+  <!-- ==================== Auth Modal (نافذة التسجيل) ==================== -->
+  <div id="authModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-md w-full p-8 text-center transform transition-all">
+      <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl font-black shadow-inner">
         🎓
       </div>
-      <h2 class="text-2xl font-extrabold text-slate-800 mb-2">مرحباً بك في Parkweb Education</h2>
-      <p class="text-slate-500 text-sm mb-6">يرجى إدخال بياناتك للدخول إلى المنصة والاستفادة من كافة الدروس والتوجيهات.</p>
+      <h2 class="text-2xl font-black text-slate-900 mb-2">Parkweb Education</h2>
+      <p class="text-slate-500 text-xs md:text-sm mb-6 leading-relaxed">منصتك الاحترافية الشاملة لمرافقة طالب البكالوريا نحو التفوق.</p>
       
       <form id="authForm" class="space-y-4 text-right">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">اسم المستخدم</label>
-          <input type="text" id="usernameInput" required placeholder="أدخل اسمك هنا..." 
-                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">اسم المستخدم</label>
+          <input type="text" id="usernameInput" required placeholder="أدخل اسمك الكامل..." 
+                 class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-slate-50/50">
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">البريد الإلكتروني</label>
+          <label class="block text-xs font-bold text-slate-700 mb-1.5">البريد الإلكتروني</label>
           <input type="email" id="emailInput" required placeholder="example@domain.com" 
-                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                 class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-slate-50/50">
         </div>
         <button type="submit" 
-                class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all text-sm">
+                class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl shadow-xl shadow-blue-500/25 transition-all text-sm">
           الدخول إلى المنصة 🚀
         </button>
       </form>
     </div>
   </div>
 
-  <!-- Main App Interface -->
+  <!-- ==================== Main App Interface (الواجهة الرئيسية) ==================== -->
   <div id="mainContent" class="hidden flex-1 flex flex-col">
     
     <!-- Navbar -->
-    <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
-      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+      <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-blue-500/20">
+          <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md shadow-blue-500/20">
             P
           </div>
           <div>
-            <h1 class="font-bold text-slate-800 text-base leading-tight">Parkweb Education</h1>
-            <p class="text-[10px] text-slate-400 font-medium">منصة تنظيم ومرافقة طالب البكالوريا</p>
+            <h1 class="font-extrabold text-slate-900 text-base leading-tight">Parkweb Education</h1>
+            <p class="text-[10px] text-slate-400 font-bold">بوابة التفوق الدراسي</p>
           </div>
         </div>
 
-        <div class="flex items-center gap-2 md:gap-4">
-          <span id="userGreeting" class="text-xs font-semibold text-slate-600 hidden md:inline-block"></span>
+        <div class="flex items-center gap-3">
+          <span id="userGreeting" class="text-xs font-bold text-slate-700 hidden md:inline-block bg-slate-100 px-3 py-1.5 rounded-lg"></span>
           <button onclick="logout()" 
-                  class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg text-xs font-bold transition-all flex items-center gap-1">
+                  class="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 shadow-xs">
             <span>تسجيل الخروج</span>
             <span>🚪</span>
           </button>
@@ -69,96 +69,232 @@
     </header>
 
     <!-- Main Content Body -->
-    <main class="max-w-6xl mx-auto px-4 py-6 space-y-8 flex-1 w-full">
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8 flex-1 w-full">
       
-      <!-- 1. Admin Note Card -->
-      <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
-        <div class="flex justify-between items-start mb-3">
-          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-            📌 ملاحظة وتوجيه اليوم للطلبة
+      <!-- 1. Admin Daily Note Card -->
+      <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
+        <div class="flex justify-between items-start mb-4">
+          <span class="bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-xs">
+            📌 توجيه اليوم للإدارة والطلبة
           </span>
-          <button onclick="toggleAdminEdit()" class="text-xs bg-white text-orange-600 hover:bg-orange-50 font-bold px-3 py-1 rounded-lg transition-all shadow-sm">
-            ✏️ تعديل الملاحظة (للإدارة)
+          <button onclick="toggleAdminEdit()" class="text-xs bg-white text-orange-700 hover:bg-orange-50 font-extrabold px-3.5 py-1.5 rounded-xl transition-all shadow-sm">
+            ✏️ تعديل التوجيه
           </button>
         </div>
 
-        <p id="adminNoteText" class="text-base md:text-lg font-bold leading-relaxed">
+        <p id="adminNoteText" class="text-base md:text-xl font-bold leading-relaxed">
           أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.
         </p>
 
-        <!-- Admin Edit Area -->
-        <div id="adminEditForm" class="hidden mt-4 pt-4 border-t border-white/20">
-          <textarea id="adminNoteInput" rows="4" 
-                    class="w-full p-3 rounded-xl text-slate-800 text-sm focus:outline-none font-medium" 
-                    placeholder="اكتب التوجيه الجديد للطلبة هنا..."></textarea>
-          <div class="flex justify-end gap-2 mt-2">
-            <button onclick="toggleAdminEdit()" class="px-3 py-1.5 text-xs font-bold bg-white/20 hover:bg-white/30 rounded-lg">إلغاء</button>
-            <button onclick="saveAdminNote()" class="px-4 py-1.5 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800">حفظ ونشر</button>
+        <!-- Admin Edit Form -->
+        <div id="adminEditForm" class="hidden mt-5 pt-5 border-t border-white/20">
+          <textarea id="adminNoteInput" rows="3" 
+                    class="w-full p-4 rounded-2xl text-slate-900 text-sm focus:outline-none font-semibold shadow-inner" 
+                    placeholder="اكتب التوجيه الجديد هنا..."></textarea>
+          <div class="flex justify-end gap-2.5 mt-3">
+            <button onclick="toggleAdminEdit()" class="px-4 py-2 text-xs font-bold bg-white/20 hover:bg-white/30 rounded-xl transition-all">إلغاء</button>
+            <button onclick="saveAdminNote()" class="px-5 py-2 text-xs font-extrabold bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-md">حفظ ونشر</button>
           </div>
         </div>
       </div>
 
-      <!-- 2. Hero Banner -->
-      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 md:p-8 text-white shadow-xl">
-        <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold inline-block mb-3">
-          منصتك الشاملة للبكالوريا 💡
-        </span>
-        <h2 class="text-2xl md:text-3xl font-black mb-2">نظم وقتك، راجع موادك، وحقق معدل أحلامك! 🎓</h2>
-        <p class="text-blue-100 text-xs md:text-sm">اختر القسم الذي تريد البدء به الآن من الخيارات أدناه لتنظيم مراجعتك بكل سهولة.</p>
-      </div>
-
-      <!-- 3. Main Sections Grid (الأقسام الرئيسية) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <!-- قسم المواد الدراسية -->
-        <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">
+      <!-- 2. Comprehensive Subjects Hub Section -->
+      <div class="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-sm space-y-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-xs">
             📚
           </div>
-          <h3 class="text-lg font-bold text-slate-800 mb-2">المواد الدراسية والمواضيع</h3>
-          <p class="text-slate-500 text-xs md:text-sm mb-4 leading-relaxed">
-            تصفح مواد البكالوريا، المواضيع السابقة، والملخصات المقترحة لكل مادة.
-          </p>
-          <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
-            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">الرياضيات 📐</button>
-            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">العلوم الفيزيائية ⚡</button>
-            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">علوم الطبيعة 🧬</button>
-            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">اللغات والأدب 📖</button>
+          <div>
+            <h3 class="text-xl font-black text-slate-900">المواد الدراسية الشاملة</h3>
+            <p class="text-slate-500 text-xs font-medium">اختر أي مادة لتصفح المواضيع المقترحة، التمارين، الأفكار الذهبية، والأسئلة.</p>
           </div>
         </div>
 
-        <!-- قسم الجدول الأسبوعي -->
-        <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">
-            📅
-          </div>
-          <h3 class="text-lg font-bold text-slate-800 mb-2">الجدول الأسبوعي الذكي</h3>
-          <p class="text-slate-500 text-xs md:text-sm mb-4 leading-relaxed">
-            برنامج مراجعة منظم يساعدك على توزيع وقتك بشكل متوازن على مدار الأسبوع.
-          </p>
-          <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 text-indigo-900 text-xs space-y-2">
-            <div class="flex justify-between items-center font-bold">
-              <span>الفترة الصباحية:</span>
-              <span class="bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">مواد الحفظ والتركيز</span>
-            </div>
-            <div class="flex justify-between items-center font-bold">
-              <span>الفترة المسائية:</span>
-              <span class="bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">حل التمارين والمواضيع</span>
-            </div>
+        <!-- Category 1: المواد الأساسية والعلمية -->
+        <div>
+          <h4 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span>🔬</span> المواد العلمية والأساسية
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <button onclick="openSubjectModal('مادة الرياضيات 📐')" class="p-4 bg-slate-50 hover:bg-blue-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-blue-300">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">📐</span>
+                <div>
+                  <h5 class="font-extrabold text-slate-900 group-hover:text-blue-600 text-sm">الرياضيات</h5>
+                  <p class="text-slate-400 text-[11px]">الدوال، المتتاليات، الاحتمالات</p>
+                </div>
+              </div>
+            </button>
+
+            <button onclick="openSubjectModal('مادة العلوم الفيزيائية ⚡')" class="p-4 bg-slate-50 hover:bg-amber-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-amber-300">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">⚡</span>
+                <div>
+                  <h5 class="font-extrabold text-slate-900 group-hover:text-amber-600 text-sm">العلوم الفيزيائية</h5>
+                  <p class="text-slate-400 text-[11px]">الميكانيك، الكهرباء، النووي</p>
+                </div>
+              </div>
+            </button>
+
+            <button onclick="openSubjectModal('علوم الطبيعة والحياة 🧬')" class="p-4 bg-slate-50 hover:bg-emerald-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-emerald-300">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">🧬</span>
+                <div>
+                  <h5 class="font-extrabold text-slate-900 group-hover:text-emerald-600 text-sm">علوم الطبيعة والحياة</h5>
+                  <p class="text-slate-400 text-[11px]">المناعة، البروتينات، التركيب الضوئي</p>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
 
+        <!-- Category 2: الشعب التقنية (الهندسات الأربعة) -->
+        <div class="pt-4 border-t border-slate-100">
+          <h4 class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span>⚙️</span> شعبة تقني رياضي (الهندسات الأربعة)
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <button onclick="openSubjectModal('الهندسة الميكانيكية ⚙️')" class="p-4 bg-indigo-50/30 hover:bg-indigo-50 border border-indigo-100 rounded-2xl text-right transition-all group hover:border-indigo-300">
+              <span class="text-2xl mb-1 block">⚙️</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-indigo-600 text-sm">الهندسة الميكانيكية</h5>
+              <p class="text-slate-400 text-[11px]">الدراسة الإنشاءية والتحليلية</p>
+            </button>
+
+            <button onclick="openSubjectModal('الهندسة الكهربائية 💡')" class="p-4 bg-indigo-50/30 hover:bg-indigo-50 border border-indigo-100 rounded-2xl text-right transition-all group hover:border-indigo-300">
+              <span class="text-2xl mb-1 block">💡</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-indigo-600 text-sm">الهندسة الكهربائية</h5>
+              <p class="text-slate-400 text-[11px]">المنطق التعاقبي والدارات</p>
+            </button>
+
+            <button onclick="openSubjectModal('الهندسة المدنية 🏗️')" class="p-4 bg-indigo-50/30 hover:bg-indigo-50 border border-indigo-100 rounded-2xl text-right transition-all group hover:border-indigo-300">
+              <span class="text-2xl mb-1 block">🏗️</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-indigo-600 text-sm">الهندسة المدنية</h5>
+              <p class="text-slate-400 text-[11px]">مقاومة المواد والبناءات</p>
+            </button>
+
+            <button onclick="openSubjectModal('هندسة الطرائق 🧪')" class="p-4 bg-indigo-50/30 hover:bg-indigo-50 border border-indigo-100 rounded-2xl text-right transition-all group hover:border-indigo-300">
+              <span class="text-2xl mb-1 block">🧪</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-indigo-600 text-sm">هندسة الطرائق</h5>
+              <p class="text-slate-400 text-[11px]">الكيمياء العضوية والصناعية</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 3: المواد الأدبية والإنسانية واللغات -->
+        <div class="pt-4 border-t border-slate-100">
+          <h4 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span>📖</span> المواد الأدبية والإنسانية واللغات
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            <button onclick="openSubjectModal('اللغة العربية وآدابها 📜')" class="p-3.5 bg-slate-50 hover:bg-purple-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-purple-300">
+              <span class="text-xl mb-1 block">📜</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-purple-600 text-xs">الأدب العربي</h5>
+            </button>
+
+            <button onclick="openSubjectModal('مادة الفلسفة 🧠')" class="p-3.5 bg-slate-50 hover:bg-purple-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-purple-300">
+              <span class="text-xl mb-1 block">🧠</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-purple-600 text-xs">الفلسفة</h5>
+            </button>
+
+            <button onclick="openSubjectModal('التاريخ والجغرافيا 🌍')" class="p-3.5 bg-slate-50 hover:bg-purple-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-purple-300">
+              <span class="text-xl mb-1 block">🌍</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-purple-600 text-xs">التاريخ والجغرافيا</h5>
+            </button>
+
+            <button onclick="openSubjectModal('اللغة الإنجليزية 🇬🇧')" class="p-3.5 bg-slate-50 hover:bg-purple-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-purple-300">
+              <span class="text-xl mb-1 block">🇬🇧</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-purple-600 text-xs">اللغة الإنجليزية</h5>
+            </button>
+
+            <button onclick="openSubjectModal('اللغة الفرنسية 🇫🇷')" class="p-3.5 bg-slate-50 hover:bg-purple-50/60 border border-slate-200 rounded-2xl text-right transition-all group hover:border-purple-300">
+              <span class="text-xl mb-1 block">🇫🇷</span>
+              <h5 class="font-extrabold text-slate-900 group-hover:text-purple-600 text-xs">اللغة الفرنسية</h5>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 3. Interactive Daily Schedule Planner -->
+      <div class="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-xs">
+              📅
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-slate-900">الجدول اليومي التفاعلي</h3>
+              <p class="text-slate-500 text-xs font-medium">أضف مهامك، مواعيدك، ومراجعتك اليومية بنفسك وتابع إنجازك مباشرة.</p>
+            </div>
+          </div>
+
+          <!-- Add Task Form -->
+          <form id="taskForm" class="flex flex-wrap items-center gap-2">
+            <input type="text" id="taskTime" required placeholder="الوقت (مثال: 08:00 - 10:00)" 
+                   class="px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50">
+            <input type="text" id="taskTitle" required placeholder="المهمة أو المادة..." 
+                   class="px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50 flex-1 min-w-[180px]">
+            <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl text-xs shadow-md transition-all">
+              + إضافة للمهمة
+            </button>
+          </form>
+        </div>
+
+        <!-- Task List container -->
+        <div id="taskList" class="space-y-3">
+          <!-- Dynamically populated tasks -->
+        </div>
       </div>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-100 py-4 text-center text-xs text-slate-400">
-      <p>© 2026 Parkweb Education - جميع الحقوق محفوظة</p>
+    <footer class="bg-white border-t border-slate-200 py-5 text-center text-xs font-bold text-slate-400">
+      <p>© 2026 Parkweb Education - جميع الحقوق محفوظة لطلبة البكالوريا</p>
     </footer>
 
   </div>
 
+  <!-- ==================== Subject Details Modal (نافذة تفاصيل المادة) ==================== -->
+  <div id="subjectModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto relative">
+      <button onclick="closeSubjectModal()" class="absolute top-6 left-6 text-slate-400 hover:text-slate-700 text-xl font-bold bg-slate-100 w-10 h-10 rounded-full flex items-center justify-center transition-all">
+        ✕
+      </button>
+      
+      <h3 id="modalSubjectTitle" class="text-2xl font-black text-slate-900 mb-6">اسم المادة</h3>
+
+      <!-- Tabs / Sections -->
+      <div class="space-y-5">
+        <!-- Section 1: مواضيع -->
+        <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-100">
+          <h4 class="font-extrabold text-blue-900 text-sm mb-2 flex items-center gap-2"><span>📂</span> مواضيع البكالوريا المقترحة</h4>
+          <p class="text-slate-600 text-xs leading-relaxed">تجميعية لأهم مواضيع البكالوريا السابقة مع التصحيح النموذجي المفصل.</p>
+        </div>
+
+        <!-- Section 2: تمارين -->
+        <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100">
+          <h4 class="font-extrabold text-amber-900 text-sm mb-2 flex items-center gap-2"><span>⚡</span> التمارين والتدريبات</h4>
+          <p class="text-slate-600 text-xs leading-relaxed">تمارين متنوعة تغطي كافة الوحدات مع التركيز على أفكار الامتحانات الرسمية.</p>
+        </div>
+
+        <!-- Section 3: أفكار -->
+        <div class="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100">
+          <h4 class="font-extrabold text-emerald-900 text-sm mb-2 flex items-center gap-2"><span>💡</span> الأفكار الذهبية والحيل</h4>
+          <p class="text-slate-600 text-xs leading-relaxed">اختصارات وطرق تفكير ذكية لحل الأسئلة الصعبة في وقت قياسي.</p>
+        </div>
+
+        <!-- Section 4: فقرة أسئلة -->
+        <div class="p-5 bg-purple-50/50 rounded-2xl border border-purple-100">
+          <h4 class="font-extrabold text-purple-900 text-sm mb-2 flex items-center gap-2"><span>❓</span> فقرة الأسئلة والاستفسارات</h4>
+          <textarea rows="3" placeholder="اكتب سؤالك أو استفسارك حول هذه المادة هنا..." class="w-full p-3 rounded-xl border border-purple-200 text-xs bg-white focus:outline-none font-medium"></textarea>
+          <button onclick="alert('تم تسجيل سؤالك بنجاح! سنقوم بمراجعته والإجابة عليه قريباً.')" class="mt-2 px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold hover:bg-purple-700 transition-all">إرسال السؤال</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JavaScript Application Logic ==================== -->
   <script>
     const authModal = document.getElementById('authModal');
     const authForm = document.getElementById('authForm');
@@ -170,12 +306,13 @@
     const adminEditForm = document.getElementById('adminEditForm');
     const adminNoteInput = document.getElementById('adminNoteInput');
 
+    // Auth Logic
     function checkAuth() {
       const user = JSON.parse(localStorage.getItem('parkweb_user'));
       if (user && user.username) {
         authModal.classList.add('hidden');
         mainContent.classList.remove('hidden');
-        userGreeting.textContent = `أهلاً بك، ${user.username} 👋`;
+        userGreeting.textContent = `مرحباً، ${user.username} 👋`;
       } else {
         authModal.classList.remove('hidden');
         mainContent.classList.add('hidden');
@@ -193,12 +330,13 @@
     });
 
     function logout() {
-      if (confirm("هل أنت تأكد من رغبتك في تسجيل الخروج؟")) {
+      if (confirm("هل أنت متأكد من رغبتك في تسجيل الخروج؟")) {
         localStorage.removeItem('parkweb_user');
         checkAuth();
       }
     }
 
+    // Admin Note Logic
     function loadAdminNote() {
       const savedNote = localStorage.getItem('parkweb_admin_note');
       if (savedNote) {
@@ -222,12 +360,95 @@
       }
     }
 
+    // Subject Modal Logic
+    const subjectModal = document.getElementById('subjectModal');
+    const modalSubjectTitle = document.getElementById('modalSubjectTitle');
+
+    function openSubjectModal(title) {
+      modalSubjectTitle.textContent = title;
+      subjectModal.classList.remove('hidden');
+      subjectModal.classList.add('flex');
+    }
+
+    function closeSubjectModal() {
+      subjectModal.classList.add('hidden');
+      subjectModal.classList.remove('flex');
+    }
+
+    // Interactive Schedule Logic
+    const taskForm = document.getElementById('taskForm');
+    const taskTime = document.getElementById('taskTime');
+    const taskTitle = document.getElementById('taskTitle');
+    const taskList = document.getElementById('taskList');
+
+    function getTasks() {
+      return JSON.parse(localStorage.getItem('parkweb_daily_tasks')) || [];
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem('parkweb_daily_tasks', JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+      const tasks = getTasks();
+      if (tasks.length === 0) {
+        taskList.innerHTML = `<div class="p-6 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-slate-400 text-xs font-semibold">لا توجد مهام مضافة في جدولك اليومي حالياً. أضف مهامك للبدء!</div>`;
+        return;
+      }
+
+      taskList.innerHTML = tasks.map((task, index) => `
+        <div class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all hover:shadow-xs">
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg text-xs font-extrabold">${task.time}</span>
+            <span class="text-sm font-bold text-slate-800 ${task.completed ? 'line-through text-slate-400' : ''}">${task.title}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleTask(${index})" class="px-3 py-1.5 text-xs font-bold rounded-xl ${task.completed ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'} hover:opacity-80 transition-all">
+              ${task.completed ? 'منجز ✓' : 'إنجاز'}
+            </button>
+            <button onclick="deleteTask(${index})" class="px-2.5 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-all">
+              حذف 🗑️
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    taskForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const timeVal = taskTime.value.trim();
+      const titleVal = taskTitle.value.trim();
+      if (timeVal && titleVal) {
+        const tasks = getTasks();
+        tasks.push({ time: timeVal, title: titleVal, completed: false });
+        saveTasks(tasks);
+        taskTime.value = '';
+        taskTitle.value = '';
+        renderTasks();
+      }
+    });
+
+    function toggleTask(index) {
+      const tasks = getTasks();
+      tasks[index].completed = !tasks[index].completed;
+      saveTasks(tasks);
+      renderTasks();
+    }
+
+    function deleteTask(index) {
+      const tasks = getTasks();
+      tasks.splice(index, 1);
+      saveTasks(tasks);
+      renderTasks();
+    }
+
+    // Init
     document.addEventListener('DOMContentLoaded', () => {
       checkAuth();
       loadAdminNote();
+      renderTasks();
     });
   </script>
 </body>
 </html>
-
 
