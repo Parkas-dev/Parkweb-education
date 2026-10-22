@@ -15,11 +15,11 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
 
     <div>
-        <!-- Navbar / Header (Optimized for PC & Mobile) -->
+        <!-- Navbar / Header -->
         <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
                 <!-- Logo & Brand -->
-                <div class="flex items-center gap-3 cursor-pointer group" onclick="goHome()">
+                <div class="flex items-center gap-3 cursor-pointer group" onclick="showSection('home')">
                     <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-blue-200 group-hover:scale-105 transition-all">
                         P
                     </div>
@@ -31,15 +31,14 @@
 
                 <!-- Desktop Navigation Links -->
                 <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                    <button onclick="goHome()" class="hover:text-blue-600 transition-colors">الرئيسية</button>
-                    <a href="#subjects-section" class="hover:text-blue-600 transition-colors">المواد الدراسية</a>
-                    <a href="#" onclick="alert('قريباً: جدول الأسبوع الذكي!')" class="hover:text-blue-600 transition-colors">الجدول الدراسي</a>
-                    <a href="#" onclick="alert('قريباً: ركن الدعم النفسي وتحفيز الطلاب!')" class="hover:text-blue-600 transition-colors">الدعم والتحفيز</a>
+                    <button onclick="showSection('home')" class="hover:text-blue-600 transition-colors">الرئيسية</button>
+                    <button onclick="showSection('subjects')" class="hover:text-blue-600 transition-colors">المواد الدراسية</button>
+                    <button onclick="showSection('schedule')" class="hover:text-blue-600 transition-colors">الجدول الأسبوعي</button>
                 </nav>
 
                 <!-- User Profile / Actions -->
                 <div class="flex items-center gap-3">
-                    <button onclick="goHome()" class="text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3.5 py-2 rounded-xl transition-all">
+                    <button onclick="showSection('home')" class="text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3.5 py-2 rounded-xl transition-all">
                         🏠 الرئيسية
                     </button>
                     <div class="w-10 h-10 rounded-full bg-blue-50 border-2 border-blue-500/30 flex items-center justify-center text-blue-700 font-bold text-sm shadow-sm">
@@ -55,235 +54,114 @@
             <!-- HOME VIEW (Default) -->
             <div id="home-view" class="space-y-8">
                 
-                <!-- Motivational Hero Banner (PC Optimized) -->
+                <!-- Hero Banner -->
                 <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 rounded-3xl p-8 sm:p-10 text-white shadow-xl shadow-blue-100 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
                     <div class="relative z-10 space-y-3 max-w-2xl">
-                        <span class="inline-block bg-white/20 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full">بنك المعرفة والتحضير المتكامل 💡</span>
-                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-snug">اختر المادة وابدأ رحلة التفوق في البكالوريا! 🎓</h2>
-                        <p class="text-blue-100 text-sm sm:text-base leading-relaxed">كل ما تحتاجه من مواضيع مقترحة، بكالوريات سابقة مع الحلول النموذجية، وملخصات شاملة منظمة خصيصاً لضمان معدل ممتاز.</p>
-                    </div>
-                    <div class="relative z-10 hidden lg:flex flex-col items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl text-center min-w-[200px]">
-                        <span class="text-3xl mb-1">🎯</span>
-                        <span class="font-bold text-lg">هدفنا: البكالوريا</span>
-                        <span class="text-xs text-blue-200 mt-1">بامتياز بتوفيق الله</span>
+                        <span class="inline-block bg-white/20 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full">منصتك الشاملة للبكالوريا 💡</span>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-snug">نظم وقتك، راجع موادك، وحقق معدل أحلامك! 🎓</h2>
+                        <p class="text-blue-100 text-sm sm:text-base leading-relaxed">اختر القسم الذي تريد البدء به الآن من الخيارات أدناه لتنظيم مراجعتك بكل سهولة.</p>
                     </div>
                 </div>
 
-                <!-- Subjects Grid Section -->
-                <div id="subjects-section" class="space-y-6">
-                    <div class="flex items-center justify-between">
-                        <h3 class="font-extrabold text-slate-900 text-xl flex items-center gap-2">
-                            <span>📚</span> المواد الدراسية والشعب العلمية:
-                        </h3>
-                        <span class="text-xs text-slate-400 font-medium hidden sm:inline">انقر على أي مادة لاستعراض المواضيع والتمارين</span>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        
-                        <!-- Math Card -->
-                        <div onclick="openSubject('math')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 cursor-pointer group space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                                📐
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-xl group-hover:text-blue-600 transition-colors">رياضيات</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">الدوال، المتتاليات، الأعداد المركبة، الاحتمالات والمزيد...</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
-                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg text-slate-600">15 موضوع وبكالوريا</span>
-                                <span class="text-blue-600 group-hover:translate-x-[-4px] transition-transform">استعرض المواضيع &larr;</span>
-                            </div>
+                <!-- Main Quick Action Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Subjects Card -->
+                    <div onclick="showSection('subjects')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer group space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl group-hover:bg-blue-600 group-hover:text-white transition-all">
+                            📚
                         </div>
-
-                        <!-- Physics Card -->
-                        <div onclick="openSubject('physics')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/5 transition-all duration-300 cursor-pointer group space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-3xl group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
-                                ⚗️
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-xl group-hover:text-indigo-600 transition-colors">العلوم الفيزيائية</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">الميكانيك، الكهرباء، التطور الكيميائي، النووي...</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
-                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg text-slate-600">12 موضوع وبكالوريا</span>
-                                <span class="text-indigo-600 group-hover:translate-x-[-4px] transition-transform">استعرض المواضيع &larr;</span>
-                            </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xl group-hover:text-blue-600">المواد الدراسية والمواضيع</h3>
+                            <p class="text-sm text-slate-500 mt-1">تصفح مواد البكالوريا، المواضيع السابقة والتصحيحات الرسمية.</p>
                         </div>
-
-                        <!-- Natural Sciences Card -->
-                        <div onclick="openSubject('science')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-emerald-500 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 cursor-pointer group space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                                🧬
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-xl group-hover:text-emerald-600 transition-colors">علوم الطبيعة والحياة</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">تركيب البروتين، الإنزيمات، المناعة، العصبي...</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
-                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg text-slate-600">14 موضوع وبكالوريا</span>
-                                <span class="text-emerald-600 group-hover:translate-x-[-4px] transition-transform">استعرض المواضيع &larr;</span>
-                            </div>
-                        </div>
-
-                        <!-- Philosophy Card -->
-                        <div onclick="openSubject('philo')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300 cursor-pointer group space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-3xl group-hover:bg-amber-600 group-hover:text-white transition-all shadow-sm">
-                                📖
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-xl group-hover:text-amber-600 transition-colors">الفلسفة</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">الشعور واللاشعور، الرياضيات، الانجراف العلمي...</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
-                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg text-slate-600">10 مقالات وبكالوريات</span>
-                                <span class="text-amber-600 group-hover:translate-x-[-4px] transition-transform">استعرض المواضيع &larr;</span>
-                            </div>
-                        </div>
-
-                        <!-- Arabic Card -->
-                        <div onclick="openSubject('arabic')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/5 transition-all duration-300 cursor-pointer group space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-3xl group-hover:bg-purple-600 group-hover:text-white transition-all shadow-sm">
-                                ✍️
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-xl group-hover:text-purple-600 transition-colors">اللغة العربية وآدابها</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">البلوغ الشعر العربي، الإحياء، المنفى، قواعد وبلاغة...</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
-                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg text-slate-600">10 مواضيع وبكالوريات</span>
-                                <span class="text-purple-600 group-hover:translate-x-[-4px] transition-transform">استعرض المواضيع &larr;</span>
-                            </div>
-                        </div>
-
-                        <!-- Languages Card -->
-                        <div onclick="openSubject('languages')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-rose-500 hover:shadow-xl hover:shadow-rose-500/5 transition-all duration-300 cursor-pointer group space-y-4">
-                            <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-3xl group-hover:bg-rose-600 group-hover:text-white transition-all shadow-sm">
-                                🌍
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 text-xl group-hover:text-rose-600 transition-colors">اللغات الأجنبية (إنجليزية/فرنسية)</h4>
-                                <p class="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed">Reading comprehension, Grammar, Letter writing...</p>
-                            </div>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400">
-                                <span class="bg-slate-100 px-2.5 py-1 rounded-lg text-slate-600">مواضيع مقترحة</span>
-                                <span class="text-rose-600 group-hover:translate-x-[-4px] transition-transform">استعرض المواضيع &larr;</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Footer Extra Cards (Tips & Tools) -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
-                    <div class="lg:col-span-2 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4 flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
-                                <span>⚡</span> نصيحة المبرمج للطالب:
-                            </h3>
-                            <p class="text-sm text-slate-600 leading-relaxed">
-                                المنصة مصممة خصيصاً لتمنحك تجربة تصفح سريعة ومريحة سواء كنت تستخدم هاتفك الآن أو حاسوبك الشخصي لاحقاً. جميع البيانات والروابط ستعمل معك بكفاءة تامة على مختلف الشاشات.
-                            </p>
-                        </div>
-                        <div class="p-3 bg-blue-50/60 rounded-2xl border border-blue-100 flex items-center justify-between text-xs sm:text-sm text-blue-900 font-semibold">
-                            <span>🚀 جاهز لبدء جلسة دراسية جديدة؟</span>
-                            <span class="font-mono bg-blue-600 text-white px-3 py-1 rounded-xl shadow-sm">25 دقيقة تركيز</span>
-                        </div>
+                        <span class="text-xs font-bold text-blue-600 inline-block">دخول قسم المواد &larr;</span>
                     </div>
 
-                    <div class="bg-emerald-50/80 border border-emerald-200/80 p-6 rounded-3xl space-y-3 flex flex-col justify-between shadow-sm">
-                        <div class="space-y-2">
-                            <h4 class="font-bold text-emerald-900 text-base flex items-center gap-2">
-                                <span>💡</span> سر التفوق في البكالوريا:
-                            </h4>
-                            <p class="text-xs sm:text-sm text-emerald-800 leading-relaxed">
-                                التنظيم + الاستمرارية + حل المواضيع السابقة هو المثلث الذهبي للعلامة الكاملة. لا تؤجل عمل اليوم إلى الغد!
-                            </p>
+                    <!-- Schedule Card -->
+                    <div onclick="showSection('schedule')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-indigo-500 hover:shadow-xl transition-all cursor-pointer group space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-3xl group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                            📅
                         </div>
-                        <span class="text-xs text-emerald-600 font-extrabold self-end">Parkweb Education Team &copy; 2026</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xl group-hover:text-indigo-600">الجدول الأسبوعي الذكي</h3>
+                            <p class="text-sm text-slate-500 mt-1">برنامج مراجعة منظم وموزع بشكل متوازن على مدار الأسبوع.</p>
+                        </div>
+                        <span class="text-xs font-bold text-indigo-600 inline-block">استعرض الجدول &larr;</span>
                     </div>
                 </div>
 
             </div>
 
-            <!-- SUBJECT DETAIL VIEW (Hidden by default, shown on click) -->
-            <div id="subject-view" class="hidden space-y-6">
-                <!-- Back Button & Header -->
-                <div class="flex items-center justify-between bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <button onclick="goHome()" class="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition-all text-sm flex items-center gap-1">
-                            &larr; العودة للمواد
-                        </button>
-                        <div>
-                            <h2 id="subject-title-header" class="text-xl font-extrabold text-slate-900">اسم المادة</h2>
-                            <p class="text-xs text-slate-500 mt-0.5">قسم المواضيع والتمارين الرسمية المعتمدة</p>
-                        </div>
+            <!-- SUBJECTS VIEW -->
+            <div id="subjects-view" class="hidden space-y-6">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-extrabold text-slate-900 text-xl flex items-center gap-2">
+                        <span>📚</span> المواد الدراسية والشعب العلمية:
+                    </h3>
+                    <button onclick="showSection('home')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-bold">&larr; العودة</button>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Math -->
+                    <div onclick="openSubject('math')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
+                        <div class="text-3xl">📐</div>
+                        <h4 class="font-bold text-lg text-slate-900">رياضيات</h4>
+                        <p class="text-xs text-slate-500">الدوال، المتتاليات، الأعداد المركبة...</p>
                     </div>
-                    <span id="subject-badge" class="hidden sm:inline-block text-xs bg-blue-50 text-blue-700 font-bold px-4 py-1.5 rounded-full border border-blue-100">شعبة علوم تجريبية / رياضيات</span>
+                    <!-- Physics -->
+                    <div onclick="openSubject('physics')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-indigo-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
+                        <div class="text-3xl">⚗️</div>
+                        <h4 class="font-bold text-lg text-slate-900">العلوم الفيزيائية</h4>
+                        <p class="text-xs text-slate-500">الميكانيك، الكهرباء، التطور الكيميائي...</p>
+                    </div>
+                    <!-- Science -->
+                    <div onclick="openSubject('science')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
+                        <div class="text-3xl">🧬</div>
+                        <h4 class="font-bold text-lg text-slate-900">علوم الطبيعة والحياة</h4>
+                        <p class="text-xs text-slate-500">تركيب البروتين، الإنزيمات، المناعة...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WEEKLY SCHEDULE VIEW -->
+            <div id="schedule-view" class="hidden space-y-6">
+                <div class="flex items-center justify-between bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                    <div>
+                        <h2 class="text-xl font-extrabold text-slate-900">📅 الجدول الأسبوعي الذكي للمراجعة</h2>
+                        <p class="text-xs text-slate-500 mt-1">توزيع متوازن للمواد العلمية والأدبية لضمان الاستيعاب الكامل</p>
+                    </div>
+                    <button onclick="showSection('home')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl font-bold">&larr; العودة</button>
                 </div>
 
-                <!-- Content Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Past Bac Exams -->
-                    <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-5 lg:col-span-2">
-                        <h3 class="font-extrabold text-slate-900 text-base flex items-center gap-2 border-b border-slate-100 pb-4">
-                            <span>📄</span> مواضيع البكالوريا الرسمية مع التصحيح النموذجي
-                        </h3>
-                        <div id="exams-list" class="space-y-3.5">
-                            <div class="p-4 rounded-2xl bg-slate-50/80 hover:bg-slate-100/80 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-all">
-                                <div>
-                                    <h4 class="font-bold text-sm text-slate-900">بكالوريا 2025 - الموضوع الأول + الحل النموذجي</h4>
-                                    <p class="text-xs text-slate-500 mt-0.5">ملف PDF رسمي مصدق من وزارة التربية الوطنية</p>
-                                </div>
-                                <a href="#" target="_blank" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-100">
-                                    تحميل / معاينة 📥
-                                </a>
-                            </div>
+                <!-- Days Tabs -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2">
+                    <button onclick="switchDay('sat')" id="tab-sat" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-blue-600 text-white shadow-md transition-all">السبت</button>
+                    <button onclick="switchDay('sun')" id="tab-sun" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الأحد</button>
+                    <button onclick="switchDay('mon')" id="tab-mon" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الإثنين</button>
+                    <button onclick="switchDay('tue')" id="tab-tue" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الثلاثاء</button>
+                    <button onclick="switchDay('wed')" id="tab-wed" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الأربعاء</button>
+                    <button onclick="switchDay('thu')" id="tab-thu" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الخميس</button>
+                </div>
 
-                            <div class="p-4 rounded-2xl bg-slate-50/80 hover:bg-slate-100/80 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-all">
-                                <div>
-                                    <h4 class="font-bold text-sm text-slate-900">بكالوريا 2024 - الموضوع الثاني + الحل النموذجي</h4>
-                                    <p class="text-xs text-slate-500 mt-0.5">ملف PDF رسمي مصدق من وزارة التربية الوطنية</p>
-                                </div>
-                                <a href="#" target="_blank" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-100">
-                                    تحميل / معاينة 📥
-                                </a>
-                            </div>
+                <!-- Schedule Content Box -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4" id="schedule-content">
+                    <!-- Content injected via JS -->
+                </div>
+            </div>
 
-                            <div class="p-4 rounded-2xl bg-slate-50/80 hover:bg-slate-100/80 border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-all">
-                                <div>
-                                    <h4 class="font-bold text-sm text-slate-900">بكالوريا 2023 - الموضوع الأول + الحل النموذجي</h4>
-                                    <p class="text-xs text-slate-500 mt-0.5">ملف PDF رسمي مصدق من وزارة التربية الوطنية</p>
-                                </div>
-                                <a href="#" target="_blank" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-100">
-                                    تحميل / معاينة 📥
-                                </a>
-                            </div>
-                        </div>
+            <!-- SUBJECT DETAIL VIEW -->
+            <div id="subject-detail-view" class="hidden space-y-6">
+                <div class="flex items-center justify-between bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <button onclick="showSection('subjects')" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">&larr; مواد أخرى</button>
+                        <h2 id="subject-detail-title" class="text-xl font-extrabold text-slate-900">المادة</h2>
                     </div>
-
-                    <!-- Side Widget -->
-                    <div class="space-y-6">
-                        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
-                            <h3 class="font-extrabold text-slate-900 text-base flex items-center gap-2">
-                                <span>📌</span> ملخصات القوانين والدروس
-                            </h3>
-                            <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
-                                ملخص شامل لأهم القوانين والعلاقات الأساسية في هذه المادة جاهز للحفظ والمراجعة السريعة ليلة الامتحان.
-                            </p>
-                            <button onclick="alert('جاري تجهيز الملخصات الشاملة قريباً..')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-4 rounded-2xl text-xs sm:text-sm transition-all">
-                                تصفح الملخصات والشروحات 📑
-                            </button>
-                        </div>
-
-                        <div class="bg-indigo-50/80 border border-indigo-200/80 p-6 rounded-3xl space-y-2.5 shadow-sm">
-                            <h4 class="font-bold text-indigo-900 text-sm flex items-center gap-2">
-                                <span>⭐</span> نصيحة الأستاذ:
-                            </h4>
-                            <p class="text-xs sm:text-sm text-indigo-800 leading-relaxed">
-                                لا تقرأ الحل مباشرة قبل أن تستنفد محاولتك في حل التمرين لمدة لا تقل عن 30 دقيقة. التفكير الذاتي يبني الذاكرة طويلة المدى.
-                            </p>
-                        </div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-slate-900">📄 المواضيع والبكالوريات السابقة</h3>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
+                        <span class="text-sm font-semibold">بكالوريا 2025 - الموضوع الأول + الحل</span>
+                        <a href="#" class="text-xs bg-blue-600 text-white font-bold px-4 py-2 rounded-xl">تحميل 📥</a>
                     </div>
                 </div>
             </div>
@@ -291,47 +169,102 @@
         </main>
     </div>
 
-    <!-- Footer (Optimized for PC & Mobile) -->
-    <footer class="bg-white border-t border-slate-200 mt-16 py-6 text-center text-xs sm:text-sm text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>جميع الحقوق محفوظة &copy; 2026 - Parkweb Education (Parkas-dev) 🎓</p>
-            <p class="text-slate-400">منصة مصممة خصيصاً لدعم طلاب البكالوريا في الجزائر 🇩🇿</p>
-        </div>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-16 py-6 text-center text-xs text-slate-500">
+        جميع الحقوق محفوظة &copy; 2026 - Parkweb Education (Parkas-dev) 🎓
     </footer>
 
-    <!-- JavaScript for View Switching -->
+    <!-- JavaScript -->
     <script>
-        const subjectData = {
-            math: { title: "الرياضيات - شعبة علوم تجريبية / رياضيات / تقني رياضي" },
-            physics: { title: "العلوم الفيزيائية - شعبة علوم تجريبية / رياضيات" },
-            science: { title: "علوم الطبيعة والحياة - شعبة علوم تجريبية" },
-            philo: { title: "الفلسفة - جميع الشعب" },
-            arabic: { title: "اللغة العربية وآدابها - جميع الشعب" },
-            languages: { title: "اللغات الأجنبية (إنجليزية وفرنسية) - جميع الشعب" }
+        const scheduleData = {
+            sat: {
+                day: "يوم السبت - التركيز على الرياضيات والعلوم",
+                morning: "☀️ الصباح: رياضيات (حل تمارين الدوال / المتتاليات) - ساعتان",
+                evening: "🌙 المساء: علوم طبيعية (مراجعة آليات تركيب البروتين + رسم التخطيطي)",
+                night: "✨ الليل: لغة إنجليزية (حل موضوع بكالوريا سابق)"
+            },
+            sun: {
+                day: "يوم الأحد - الفيزياء والعلوم الشرعية",
+                morning: "☀️ الصباح: علوم فيزيائية (المتابعة الزمنية والتحول الكيميائي)",
+                evening: "🌙 المساء: علوم إسلامية (حفظ وتكرار 2 دروس مع حل الأسئلة)",
+                night: "✨ الليل: رياضيات (حل 3 تمارين سريعة)"
+            },
+            mon: {
+                day: "يوم الإثنين - علوم الطبيعة والفلسفة",
+                morning: "☀️ الصباح: علوم طبيعية (حل تمارينات منهجية الإجابة)",
+                evening: "🌙 المساء: فلسفة (قراءة ومراجعة مقالة فلسفية ومخططها)",
+                night: "✨ الليل: لغة عربية (قواعد وبلاغة)"
+            },
+            tue: {
+                day: "يوم الثلاثاء - رياضيات وفيزياء تكثيفي",
+                morning: "☀️ الصباح: رياضيات (حل موضوع بكالوريا كامل بحساب الوقت)",
+                evening: "🌙 المساء: علوم فيزيائية (الكهرباء RC و RL)",
+                night: "✨ الليل: لغة فرنسية (Compte rendu)"
+            },
+            wed: {
+                day: "يوم الأربعاء - حفظ وتحضير التاريخ والجغرافيا",
+                morning: "☀️ الصباح: تاريخ وجغرافيا (حفظ المصطلحات والشخصيات)",
+                evening: "🌙 المساء: رياضيات أو علوم (مراجعة النقاط الضعيفة)",
+                night: "✨ الليل: استراحة أو مراجعة خفيفة"
+            },
+            thu: {
+                day: "يوم الخميس - المراجعة الشاملة وتقييم الأسبوع",
+                morning: "☀️ الصباح: حل مواضيع بكالوريا سابقة مقترحة",
+                evening: "🌙 المساء: مراجعة ملخصات الأسبوع كاملاً",
+                night: "✨ الليل: تنظيم جدول الأسبوع القادم وتجهيز الملفات"
+            }
         };
 
-        function openSubject(subjectKey) {
-            const homeView = document.getElementById('home-view');
-            const subjectView = document.getElementById('subject-view');
-            const titleHeader = document.getElementById('subject-title-header');
+        function showSection(section) {
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            document.getElementById('schedule-view').classList.add('hidden');
+            document.getElementById('subject-detail-view').classList.add('hidden');
 
-            if (subjectData[subjectKey]) {
-                titleHeader.textContent = subjectData[subjectKey].title;
+            if (section === 'home') document.getElementById('home-view').classList.remove('hidden');
+            if (section === 'subjects') document.getElementById('subjects-view').classList.remove('hidden');
+            if (section === 'schedule') {
+                document.getElementById('schedule-view').classList.remove('hidden');
+                switchDay('sat');
             }
-
-            homeView.classList.add('hidden');
-            subjectView.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function goHome() {
-            const homeView = document.getElementById('home-view');
-            const subjectView = document.getElementById('subject-view');
+        function openSubject(name) {
+            showSection('subject-detail');
+            document.getElementById('subject-detail-view').classList.remove('hidden');
+            document.getElementById('home-view').classList.add('hidden');
+            document.getElementById('subjects-view').classList.add('hidden');
+            
+            const titles = { math: 'الرياضيات', physics: 'العلوم الفيزيائية', science: 'علوم الطبيعة والحياة' };
+            document.getElementById('subject-detail-title').textContent = titles[name] || 'المادة';
+        }
 
-            subjectView.classList.add('hidden');
-            homeView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function switchDay(dayKey) {
+            // Update tabs UI
+            document.querySelectorAll('.day-tab').forEach(tab => {
+                tab.className = "day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all";
+            });
+            const activeTab = document.getElementById(`tab-${dayKey}`);
+            if (activeTab) {
+                activeTab.className = "day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-blue-600 text-white shadow-md transition-all";
+            }
+
+            // Update content
+            const data = scheduleData[dayKey];
+            const contentBox = document.getElementById('schedule-content');
+            if (data && contentBox) {
+                contentBox.innerHTML = `
+                    <h3 class="font-extrabold text-blue-700 text-lg border-b border-slate-100 pb-3">${data.day}</h3>
+                    <div class="space-y-3 pt-2">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-semibold text-slate-800">${data.morning}</div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-semibold text-slate-800">${data.evening}</div>
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-semibold text-slate-800">${data.night}</div>
+                    </div>
+                `;
+            }
         }
     </script>
 </body>
 </html>
+
