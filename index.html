@@ -4,8 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parkweb Education - منصة طالب البكالوريا الشاملة</title>
+  <meta name="description" content="منصة عربية لمرافقة طالب البكالوريا: مواضيع وتمارين وأفكار لكل المواد، وجدول يومي لتنظيم المراجعة.">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Parkweb Education - منصة طالب البكالوريا الشاملة">
+  <meta property="og:description" content="مواضيع وتمارين وأفكار لكل مواد البكالوريا، وجدول يومي لتنظيم المراجعة.">
+  <meta property="og:locale" content="ar_DZ">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎓%3C/text%3E%3C/svg%3E">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Cairo', sans-serif; }
@@ -24,18 +33,14 @@
       
       <form id="authForm" class="space-y-4 text-right">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">اسم المستخدم</label>
-          <input type="text" id="usernameInput" required placeholder="أدخل اسمك الكامل..." 
+          <label for="usernameInput" class="block text-xs font-bold text-slate-700 mb-1.5">اسمك</label>
+          <input type="text" id="usernameInput" required maxlength="40" autocomplete="name" placeholder="أدخل اسمك..."
                  class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-slate-50/50">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1.5">البريد الإلكتروني</label>
-          <input type="email" id="emailInput" required placeholder="example@domain.com" 
-                 class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-slate-50/50">
+          <p class="text-[11px] text-slate-400 mt-2">يُحفظ اسمك وجدولك على هذا الجهاز فقط.</p>
         </div>
         <button type="submit" 
                 class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl shadow-xl shadow-blue-500/25 transition-all text-sm">
-          الدخول إلى المنصة 🚀
+‎          الدخول إلى المنصة 🚀
         </button>
       </form>
     </div>
@@ -61,7 +66,7 @@
           <span id="userGreeting" class="text-xs font-bold text-slate-700 hidden md:inline-block bg-slate-100 px-3 py-1.5 rounded-lg"></span>
           <button onclick="logout()" 
                   class="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 shadow-xs">
-            <span>تسجيل الخروج</span>
+            <span>تغيير الاسم</span>
             <span>🚪</span>
           </button>
         </div>
@@ -75,27 +80,12 @@
       <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
         <div class="flex justify-between items-start mb-4">
           <span class="bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-xs">
-            📌 توجيه اليوم للإدارة والطلبة
+‎            📌 توجيه اليوم
           </span>
-          <button onclick="toggleAdminEdit()" class="text-xs bg-white text-orange-700 hover:bg-orange-50 font-extrabold px-3.5 py-1.5 rounded-xl transition-all shadow-sm">
-            ✏️ تعديل التوجيه
-          </button>
         </div>
 
-        <p id="adminNoteText" class="text-base md:text-xl font-bold leading-relaxed">
-          أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.
-        </p>
-
-        <!-- Admin Edit Form -->
-        <div id="adminEditForm" class="hidden mt-5 pt-5 border-t border-white/20">
-          <textarea id="adminNoteInput" rows="3" 
-                    class="w-full p-4 rounded-2xl text-slate-900 text-sm focus:outline-none font-semibold shadow-inner" 
-                    placeholder="اكتب التوجيه الجديد هنا..."></textarea>
-          <div class="flex justify-end gap-2.5 mt-3">
-            <button onclick="toggleAdminEdit()" class="px-4 py-2 text-xs font-bold bg-white/20 hover:bg-white/30 rounded-xl transition-all">إلغاء</button>
-            <button onclick="saveAdminNote()" class="px-5 py-2 text-xs font-extrabold bg-slate-900 text-white rounded-xl hover:bg-slate-800 shadow-md">حفظ ونشر</button>
-          </div>
-        </div>
+‎        <!-- يُملأ من SITE_CONFIG.dailyNote في الأسفل -->
+        <p id="adminNoteText" class="text-base md:text-xl font-bold leading-relaxed"></p>
       </div>
 
       <!-- 2. Comprehensive Subjects Hub Section -->
@@ -235,7 +225,7 @@
             <input type="text" id="taskTitle" required placeholder="المهمة أو المادة..." 
                    class="px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50 flex-1 min-w-[180px]">
             <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl text-xs shadow-md transition-all">
-              + إضافة للمهمة
+‎              + إضافة للمهمة
             </button>
           </form>
         </div>
@@ -256,59 +246,96 @@
   </div>
 
   <!-- ==================== Subject Details Modal (نافذة تفاصيل المادة) ==================== -->
-  <div id="subjectModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+  <div id="subjectModal" role="dialog" aria-modal="true" aria-labelledby="modalSubjectTitle" onclick="if (event.target === this) closeSubjectModal()" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-6 md:p-8 max-h-[90vh] overflow-y-auto relative">
-      <button onclick="closeSubjectModal()" class="absolute top-6 left-6 text-slate-400 hover:text-slate-700 text-xl font-bold bg-slate-100 w-10 h-10 rounded-full flex items-center justify-center transition-all">
+      <button onclick="closeSubjectModal()" aria-label="إغلاق" class="absolute top-6 left-6 text-slate-400 hover:text-slate-700 text-xl font-bold bg-slate-100 w-10 h-10 rounded-full flex items-center justify-center transition-all">
         ✕
       </button>
-      
+
       <h3 id="modalSubjectTitle" class="text-2xl font-black text-slate-900 mb-6">اسم المادة</h3>
 
-      <!-- Tabs / Sections -->
-      <div class="space-y-5">
-        <!-- Section 1: مواضيع -->
-        <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-100">
-          <h4 class="font-extrabold text-blue-900 text-sm mb-2 flex items-center gap-2"><span>📂</span> مواضيع البكالوريا المقترحة</h4>
-          <p class="text-slate-600 text-xs leading-relaxed">تجميعية لأهم مواضيع البكالوريا السابقة مع التصحيح النموذجي المفصل.</p>
-        </div>
+‎      <!-- تُملأ الأقسام من RESOURCES في الأسفل -->
+      <div id="modalSections" class="space-y-5"></div>
 
-        <!-- Section 2: تمارين -->
-        <div class="p-5 bg-amber-50/50 rounded-2xl border border-amber-100">
-          <h4 class="font-extrabold text-amber-900 text-sm mb-2 flex items-center gap-2"><span>⚡</span> التمارين والتدريبات</h4>
-          <p class="text-slate-600 text-xs leading-relaxed">تمارين متنوعة تغطي كافة الوحدات مع التركيز على أفكار الامتحانات الرسمية.</p>
-        </div>
-
-        <!-- Section 3: أفكار -->
-        <div class="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100">
-          <h4 class="font-extrabold text-emerald-900 text-sm mb-2 flex items-center gap-2"><span>💡</span> الأفكار الذهبية والحيل</h4>
-          <p class="text-slate-600 text-xs leading-relaxed">اختصارات وطرق تفكير ذكية لحل الأسئلة الصعبة في وقت قياسي.</p>
-        </div>
-
-        <!-- Section 4: فقرة أسئلة -->
-        <div class="p-5 bg-purple-50/50 rounded-2xl border border-purple-100">
-          <h4 class="font-extrabold text-purple-900 text-sm mb-2 flex items-center gap-2"><span>❓</span> فقرة الأسئلة والاستفسارات</h4>
-          <textarea rows="3" placeholder="اكتب سؤالك أو استفسارك حول هذه المادة هنا..." class="w-full p-3 rounded-xl border border-purple-200 text-xs bg-white focus:outline-none font-medium"></textarea>
-          <button onclick="alert('تم تسجيل سؤالك بنجاح! سنقوم بمراجعته والإجابة عليه قريباً.')" class="mt-2 px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold hover:bg-purple-700 transition-all">إرسال السؤال</button>
-        </div>
+‎      <!-- قسم الأسئلة: يظهر زر التواصل فقط إذا ضبطت SITE_CONFIG.contactUrl -->
+      <div class="p-5 mt-5 bg-purple-50/50 rounded-2xl border border-purple-100">
+        <h4 class="font-extrabold text-purple-900 text-sm mb-2 flex items-center gap-2"><span>❓</span> الأسئلة والاستفسارات</h4>
+        <p id="contactText" class="text-slate-600 text-xs leading-relaxed">سيتم تفعيل هذه الخاصية قريباً.</p>
+        <a id="contactLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden mt-3 inline-block px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold hover:bg-purple-700 transition-all">تواصل معنا</a>
       </div>
     </div>
   </div>
 
   <!-- ==================== JavaScript Application Logic ==================== -->
   <script>
+‎    // ============ إعدادات الموقع (عدّلها من هنا ثم ارفع التغيير إلى GitHub) ============
+    const SITE_CONFIG = {
+‎      // توجيه اليوم: يظهر لكل الطلبة بعد نشر التعديل
+      dailyNote: 'أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.',
+‎      // رابط التواصل لقسم الأسئلة (تيليغرام، واتساب، بريد...). اتركه فارغاً لإخفاء الزر.
+‎      // أمثلة: 'https://t.me/username'  أو  'mailto:you@example.com'
+      contactUrl: ''
+    };
+
+‎    // ============ محتوى المواد ============
+‎    // المفتاح = نفس العنوان الممرَّر إلى openSubjectModal في الأزرار أعلاه.
+‎    // أضف الروابط هنا، مثال:
+‎    // 'مادة الرياضيات 📐': {
+    //   exams:     [{ title: 'موضوع بكالوريا 2025 - الشعبة العلمية', url: 'https://...' }],
+    //   exercises: [{ title: 'تمارين الدوال', url: 'https://...' }],
+    //   tips:      [{ title: 'حيلة دراسة الدالة', url: 'https://...' }]
+    // },
+    const RESOURCES = {};
+
+    const SECTIONS = [
+      { key: 'exams',     icon: '📂', title: 'مواضيع البكالوريا المقترحة', box: 'bg-blue-50/50 border-blue-100',       head: 'text-blue-900' },
+      { key: 'exercises', icon: '⚡', title: 'التمارين والتدريبات',         box: 'bg-amber-50/50 border-amber-100',     head: 'text-amber-900' },
+      { key: 'tips',      icon: '💡', title: 'الأفكار الذهبية والحيل',      box: 'bg-emerald-50/50 border-emerald-100', head: 'text-emerald-900' }
+    ];
+
+‎    // ============ أدوات مساعدة ============
+    function esc(value) {
+      return String(value).replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
+‎    // نسمح فقط بروابط http/https/mailto
+    function safeUrl(url) {
+      try {
+        const u = new URL(url, location.href);
+        return ['https:', 'http:', 'mailto:'].includes(u.protocol) ? u.href : '#';
+      } catch (e) {
+        return '#';
+      }
+    }
+
+    function readJSON(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function writeJSON(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) { /* التخزين غير متاح (وضع التصفح الخاص مثلاً) */ }
+    }
+
+‎    // ============ العناصر ============
     const authModal = document.getElementById('authModal');
     const authForm = document.getElementById('authForm');
     const mainContent = document.getElementById('mainContent');
     const usernameInput = document.getElementById('usernameInput');
-    const emailInput = document.getElementById('emailInput');
     const userGreeting = document.getElementById('userGreeting');
     const adminNoteText = document.getElementById('adminNoteText');
-    const adminEditForm = document.getElementById('adminEditForm');
-    const adminNoteInput = document.getElementById('adminNoteInput');
 
-    // Auth Logic
+‎    // ============ الدخول (اسم محلي على الجهاز) ============
     function checkAuth() {
-      const user = JSON.parse(localStorage.getItem('parkweb_user'));
+      const user = readJSON('parkweb_user', null);
       if (user && user.username) {
         authModal.classList.add('hidden');
         mainContent.classList.remove('hidden');
@@ -321,51 +348,65 @@
 
     authForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const userData = {
-        username: usernameInput.value.trim(),
-        email: emailInput.value.trim()
-      };
-      localStorage.setItem('parkweb_user', JSON.stringify(userData));
+      const username = usernameInput.value.trim();
+      if (!username) return;
+      writeJSON('parkweb_user', { username });
       checkAuth();
     });
 
     function logout() {
-      if (confirm("هل أنت متأكد من رغبتك في تسجيل الخروج؟")) {
-        localStorage.removeItem('parkweb_user');
+      if (confirm('هل تريد تغيير الاسم؟ جدولك اليومي سيبقى محفوظاً على هذا الجهاز.')) {
+        try { localStorage.removeItem('parkweb_user'); } catch (e) {}
+        usernameInput.value = '';
         checkAuth();
       }
     }
 
-    // Admin Note Logic
+‎    // ============ توجيه اليوم ============
     function loadAdminNote() {
-      const savedNote = localStorage.getItem('parkweb_admin_note');
-      if (savedNote) {
-        adminNoteText.textContent = savedNote;
-      }
+      adminNoteText.textContent = SITE_CONFIG.dailyNote;
     }
 
-    function toggleAdminEdit() {
-      adminEditForm.classList.toggle('hidden');
-      if (!adminEditForm.classList.contains('hidden')) {
-        adminNoteInput.value = adminNoteText.textContent.trim();
-      }
-    }
-
-    function saveAdminNote() {
-      const newNote = adminNoteInput.value.trim();
-      if (newNote) {
-        localStorage.setItem('parkweb_admin_note', newNote);
-        adminNoteText.textContent = newNote;
-        toggleAdminEdit();
-      }
-    }
-
-    // Subject Modal Logic
+‎    // ============ نافذة المادة ============
     const subjectModal = document.getElementById('subjectModal');
     const modalSubjectTitle = document.getElementById('modalSubjectTitle');
+    const modalSections = document.getElementById('modalSections');
+    const contactText = document.getElementById('contactText');
+    const contactLink = document.getElementById('contactLink');
+
+    function renderSections(title) {
+      const data = RESOURCES[title] || {};
+      modalSections.innerHTML = SECTIONS.map(section => {
+        const items = Array.isArray(data[section.key]) ? data[section.key] : [];
+        const body = items.length
+          ? `<ul class="space-y-2">${items.map(item => `
+              <li>
+                <a href="${esc(safeUrl(item.url))}" target="_blank" rel="noopener noreferrer"
+                   class="block px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:border-blue-300 hover:text-blue-700 transition-all">
+                  ${esc(item.title)}
+                </a>
+              </li>`).join('')}</ul>`
+          : `<p class="text-slate-500 text-xs leading-relaxed">سيُضاف المحتوى قريباً.</p>`;
+        return `
+          <div class="p-5 rounded-2xl border ${section.box}">
+            <h4 class="font-extrabold ${section.head} text-sm mb-3 flex items-center gap-2"><span>${section.icon}</span> ${section.title}</h4>
+            ${body}
+          </div>`;
+      }).join('');
+
+      if (SITE_CONFIG.contactUrl) {
+        contactLink.href = safeUrl(SITE_CONFIG.contactUrl);
+        contactLink.classList.remove('hidden');
+        contactText.textContent = 'لديك سؤال حول هذه المادة؟ راسلنا مباشرة.';
+      } else {
+        contactLink.classList.add('hidden');
+        contactText.textContent = 'سيتم تفعيل هذه الخاصية قريباً.';
+      }
+    }
 
     function openSubjectModal(title) {
       modalSubjectTitle.textContent = title;
+      renderSections(title);
       subjectModal.classList.remove('hidden');
       subjectModal.classList.add('flex');
     }
@@ -375,18 +416,23 @@
       subjectModal.classList.remove('flex');
     }
 
-    // Interactive Schedule Logic
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSubjectModal();
+    });
+
+‎    // ============ الجدول اليومي ============
     const taskForm = document.getElementById('taskForm');
     const taskTime = document.getElementById('taskTime');
     const taskTitle = document.getElementById('taskTitle');
     const taskList = document.getElementById('taskList');
 
     function getTasks() {
-      return JSON.parse(localStorage.getItem('parkweb_daily_tasks')) || [];
+      const tasks = readJSON('parkweb_daily_tasks', []);
+      return Array.isArray(tasks) ? tasks : [];
     }
 
     function saveTasks(tasks) {
-      localStorage.setItem('parkweb_daily_tasks', JSON.stringify(tasks));
+      writeJSON('parkweb_daily_tasks', tasks);
     }
 
     function renderTasks() {
@@ -397,17 +443,17 @@
       }
 
       taskList.innerHTML = tasks.map((task, index) => `
-        <div class="flex items-center justify-between p-4 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all hover:shadow-xs">
-          <div class="flex items-center gap-3">
-            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg text-xs font-extrabold">${task.time}</span>
-            <span class="text-sm font-bold text-slate-800 ${task.completed ? 'line-through text-slate-400' : ''}">${task.title}</span>
+        <div class="flex items-center justify-between gap-3 p-4 bg-slate-50 border border-slate-200/80 rounded-2xl transition-all hover:shadow-xs">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg text-xs font-extrabold shrink-0">${esc(task.time)}</span>
+            <span class="text-sm font-bold text-slate-800 break-words ${task.completed ? 'line-through text-slate-400' : ''}">${esc(task.title)}</span>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 shrink-0">
             <button onclick="toggleTask(${index})" class="px-3 py-1.5 text-xs font-bold rounded-xl ${task.completed ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'} hover:opacity-80 transition-all">
               ${task.completed ? 'منجز ✓' : 'إنجاز'}
             </button>
             <button onclick="deleteTask(${index})" class="px-2.5 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-all">
-              حذف 🗑️
+‎              حذف 🗑️
             </button>
           </div>
         </div>
@@ -430,6 +476,7 @@
 
     function toggleTask(index) {
       const tasks = getTasks();
+      if (!tasks[index]) return;
       tasks[index].completed = !tasks[index].completed;
       saveTasks(tasks);
       renderTasks();
@@ -442,7 +489,7 @@
       renderTasks();
     }
 
-    // Init
+‎    // ============ التشغيل ============
     document.addEventListener('DOMContentLoaded', () => {
       checkAuth();
       loadAdminNote();
@@ -451,4 +498,3 @@
   </script>
 </body>
 </html>
-
