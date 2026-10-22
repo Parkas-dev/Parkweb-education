@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkweb Education - لوحة تحكم البكالوريا</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cairo Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Navbar / Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-blue-200">
+                    P
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg text-slate-900 leading-tight">Parkweb Education</h1>
+                    <p class="text-xs text-slate-500">منصة تنظيم ومرافقة طالب البكالوريا</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-semibold text-slate-700 hidden sm:inline">مرحباً بك 👋</span>
+                <div class="w-9 h-9 rounded-full bg-blue-100 border-2 border-blue-500 flex items-center justify-center text-blue-700 font-bold text-sm">
+                    BAC
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+
+        <!-- Motivational Hero Banner -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-lg shadow-blue-100 relative overflow-hidden">
+            <div class="relative z-10 space-y-2">
+                <span class="inline-block bg-white/20 backdrop-blur-md text-xs font-semibold px-3 py-1 rounded-full">جرعة تحفيز يومية 💡</span>
+                <h2 class="text-xl sm:text-2xl font-bold">تنفس عميقاً.. خطوة اليوم تقربك أكثر من هدف البكالوريا! 🎓</h2>
+                <p class="text-blue-100 text-sm max-w-xl">التنظيم والهدوء هما سر النجاح. لا تقلق من المادة العلمية، قسمها إلى أجزاء صغيرة وانطلق.</p>
+            </div>
+        </div>
+
+        <!-- Grid Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Today's Schedule & Progress (2 Columns) -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Progress Overview Card -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                            <span>📊</span> نسبة إنجاز اليوم
+                        </h3>
+                        <span class="text-sm font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">65% مكتمل</span>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                        <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 65%"></div>
+                    </div>
+
+                    <!-- Tasks List -->
+                    <div class="space-y-2 pt-2">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" checked class="w-5 h-5 accent-emerald-600 rounded">
+                                <span class="text-sm font-semibold line-through text-slate-400">رياضيات: حل تمارين الدوال اللوغاريتمية</span>
+                            </div>
+                            <span class="text-xs bg-slate-200 text-slate-600 px-2 py-1 rounded">تم الإنجاز</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="w-5 h-5 accent-blue-600 rounded">
+                                <span class="text-sm font-semibold text-slate-700">علوم طبيعية: مراجعة آليات تركيب البروتين</span>
+                            </div>
+                            <span class="text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded">قيد المراجعة</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" class="w-5 h-5 accent-blue-600 rounded">
+                                <span class="text-sm font-semibold text-slate-700">الفيزياء: تمارين المتابعة الزمنية لتفاعل كيميائي</span>
+                            </div>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">مؤجلة للمساء</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <a href="#" class="p-4 bg-white rounded-2xl border border-slate-200 hover:border-blue-500 transition-all shadow-sm group">
+                        <div class="text-2xl mb-2">📅</div>
+                        <h4 class="font-bold text-slate-800 group-hover:text-blue-600">الجدول الكامل</h4>
+                        <p class="text-xs text-slate-500">تنظيم المواد والأسبوع</p>
+                    </a>
+                    <a href="#" class="p-4 bg-white rounded-2xl border border-slate-200 hover:border-blue-500 transition-all shadow-sm group">
+                        <div class="text-2xl mb-2">💬</div>
+                        <h4 class="font-bold text-slate-800 group-hover:text-blue-600">الدعم والاستفسارات</h4>
+                        <p class="text-xs text-slate-500">تغلب على التوتر والقلق</p>
+                    </a>
+                    <a href="#" class="p-4 bg-white rounded-2xl border border-slate-200 hover:border-blue-500 transition-all shadow-sm group">
+                        <div class="text-2xl mb-2">🎯</div>
+                        <h4 class="font-bold text-slate-800 group-hover:text-blue-600">دورة الامتحانات</h4>
+                        <p class="text-xs text-slate-500">مواضيع وبكالوريات سابقة</p>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Sidebar / Pomodoro Timer (1 Column) -->
+            <div class="space-y-6">
+                
+                <!-- Quick Pomodoro Widget -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center space-y-4">
+                    <div class="flex items-center justify-center gap-2 text-slate-700 font-bold">
+                        <span>⏱️</span> مؤقت التركيز (Pomodoro)
+                    </div>
+
+                    <!-- Timer Circle / Display -->
+                    <div class="py-6 bg-slate-50 rounded-2xl border border-slate-100">
+                        <span class="text-5xl font-black text-blue-600 font-mono tracking-tight">25:00</span>
+                        <p class="text-xs text-slate-400 mt-2">جلسة تركيز مركزة بدون مشتتات</p>
+                    </div>
+
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all">
+                        ابدأ الجلسة الآن 🚀
+                    </button>
+                </div>
+
+                <!-- Daily Tip Card -->
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl space-y-2">
+                    <h4 class="font-bold text-emerald-900 text-sm flex items-center gap-2">
+                        <span>💡</span> نصيحة اليوم للتركيز:
+                    </h4>
+                    <p class="text-xs text-emerald-800 leading-relaxed">
+                        راجِع لمدة 25 دقيقة بتركيز تام، ثم خذ استراحة لمدة 5 دقائق (قم وابتعد عن الشاشة وشرب بعض الماء). هذه الطريقة تقلل إجهاد العقل وتزيد استيعابك!
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
