@@ -59,39 +59,41 @@
                         <h3 class="font-bold text-slate-900 flex items-center gap-2">
                             <span>📊</span> نسبة إنجاز اليوم
                         </h3>
-                        <span class="text-sm font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">65% مكتمل</span>
+                        <span id="progress-text" class="text-sm font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">0% مكتمل</span>
                     </div>
                     
                     <!-- Progress Bar -->
                     <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-                        <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 65%"></div>
+                        <div id="progress-bar" class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
                     </div>
 
                     <!-- Tasks List -->
-                    <div class="space-y-2 pt-2">
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                    <div class="space-y-2 pt-2" id="tasks-container">
+                        
+                        <div class="task-item flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 transition-all">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" checked class="w-5 h-5 accent-emerald-600 rounded">
-                                <span class="text-sm font-semibold line-through text-slate-400">رياضيات: حل تمارين الدوال اللوغاريتمية</span>
+                                <input type="checkbox" class="task-checkbox w-5 h-5 accent-emerald-600 rounded cursor-pointer" onchange="updateProgress()">
+                                <span class="task-text text-sm font-semibold text-slate-700">رياضيات: حل تمارين الدوال اللوغاريتمية</span>
                             </div>
-                            <span class="text-xs bg-slate-200 text-slate-600 px-2 py-1 rounded">تم الإنجاز</span>
+                            <span class="task-status text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded">قيد المراجعة</span>
                         </div>
 
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200">
+                        <div class="task-item flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 transition-all">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-5 h-5 accent-blue-600 rounded">
-                                <span class="text-sm font-semibold text-slate-700">علوم طبيعية: مراجعة آليات تركيب البروتين</span>
+                                <input type="checkbox" class="task-checkbox w-5 h-5 accent-emerald-600 rounded cursor-pointer" onchange="updateProgress()">
+                                <span class="task-text text-sm font-semibold text-slate-700">علوم طبيعية: مراجعة آليات تركيب البروتين</span>
                             </div>
-                            <span class="text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded">قيد المراجعة</span>
+                            <span class="task-status text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded">قيد المراجعة</span>
                         </div>
 
-                        <div class="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200">
+                        <div class="task-item flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 transition-all">
                             <div class="flex items-center gap-3">
-                                <input type="checkbox" class="w-5 h-5 accent-blue-600 rounded">
-                                <span class="text-sm font-semibold text-slate-700">الفيزياء: تمارين المتابعة الزمنية لتفاعل كيميائي</span>
+                                <input type="checkbox" class="task-checkbox w-5 h-5 accent-emerald-600 rounded cursor-pointer" onchange="updateProgress()">
+                                <span class="task-text text-sm font-semibold text-slate-700">الفيزياء: تمارين المتابعة الزمنية لتفاعل كيميائي</span>
                             </div>
-                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">مؤجلة للمساء</span>
+                            <span class="task-status text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded">قيد المراجعة</span>
                         </div>
+
                     </div>
                 </div>
 
@@ -155,8 +157,61 @@
 
     </main>
 
-    <!-- JavaScript for Pomodoro Timer -->
+    <!-- JavaScript for Interactivity -->
     <script>
+        // --- Tasks & Progress Logic ---
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const total = checkboxes.length;
+            let checkedCount = 0;
+
+            checkboxes.forEach((cb) => {
+                const item = cb.closest('.task-item');
+                const textSpan = item.querySelector('.task-text');
+                const statusSpan = item.querySelector('.task-status');
+
+                if (cb.checked) {
+                    checkedCount++;
+                    textSpan.classList.add('line-through', 'text-slate-400');
+                    textSpan.classList.remove('text-slate-700');
+                    statusSpan.textContent = 'تم الإنجاز';
+                    statusSpan.className = 'task-status text-xs bg-slate-200 text-slate-600 px-2 py-1 rounded';
+                    item.classList.add('bg-slate-50/80');
+                    item.classList.remove('bg-white');
+                } else {
+                    textSpan.classList.remove('line-through', 'text-slate-400');
+                    textSpan.classList.add('text-slate-700');
+                    statusSpan.textContent = 'قيد المراجعة';
+                    statusSpan.className = 'task-status text-xs bg-amber-100 text-amber-700 font-medium px-2 py-1 rounded';
+                    item.classList.remove('bg-slate-50/80');
+                    item.classList.add('bg-white');
+                }
+            });
+
+            const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-text').textContent = percentage + '% مكتمل';
+
+            // Save state to localStorage
+            const states = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('parkweb_task_states', JSON.stringify(states));
+        }
+
+        // Load states on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedStates = JSON.parse(localStorage.getItem('parkweb_task_states'));
+            if (savedStates) {
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                checkboxes.forEach((cb, index) => {
+                    if (savedStates[index] !== undefined) {
+                        cb.checked = savedStates[index];
+                    }
+                });
+                updateProgress();
+            }
+        });
+
+        // --- Pomodoro Timer Logic ---
         let timerMinutes = 25;
         let timerSeconds = 0;
         let interval = null;
@@ -175,7 +230,6 @@
 
         function togglePomodoro() {
             if (!isRunning) {
-                // Start timer
                 isRunning = true;
                 timerBtn.textContent = 'إيقاف مؤقت ⏸️';
                 timerBtn.className = 'w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-amber-100 transition-all';
@@ -189,23 +243,21 @@
                         timerMinutes--;
                         timerSeconds = 59;
                     } else {
-                        // Timer finished
                         clearInterval(interval);
                         isRunning = false;
                         timerBtn.textContent = 'ابدأ الجلسة الآن 🚀';
-                        timerBtn.className = 'w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all';
+                        timerBtn.className = 'w-full bg-blue-600 hover:bg-blue-705 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all';
                         timerStatus.textContent = 'انتهت الجلسة! خذ استراحة قصيرة ☕';
                         alert('أحسنت! انتهت جلسة التركيز، خذ استراحة لمدة 5 دقائق.');
                     }
                     updateDisplay();
                 }, 1000);
             } else {
-                // Pause timer
                 clearInterval(interval);
                 isRunning = false;
                 timerBtn.textContent = 'استئناف الجلسة ▶️';
                 timerBtn.className = 'w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-emerald-100 transition-all';
-                timerStatus.timerStatus = 'المؤقت متوقف مؤقتاً';
+                timerStatus.textContent = 'المؤقت متوقف مؤقتاً';
             }
         }
 
