@@ -8,16 +8,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-    }
+    body { font-family: 'Cairo', sans-serif; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-  <!-- ==================== Auth Modal (نافذة التسجيل) ==================== -->
+  <!-- Auth Modal (نافذة التسجيل) -->
   <div id="authModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl border border-slate-100 max-w-md w-full p-6 text-center transform transition-all">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-100 max-w-md w-full p-6 text-center">
       <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
         🎓
       </div>
@@ -28,26 +26,26 @@
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">اسم المستخدم</label>
           <input type="text" id="usernameInput" required placeholder="أدخل اسمك هنا..." 
-                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">البريد الإلكتروني</label>
           <input type="email" id="emailInput" required placeholder="example@domain.com" 
-                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
         </div>
         <button type="submit" 
-                class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-200 text-sm">
+                class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all text-sm">
           الدخول إلى المنصة 🚀
         </button>
       </form>
     </div>
   </div>
 
-  <!-- ==================== Main App Interface (الواجهة الرئيسية) ==================== -->
+  <!-- Main App Interface -->
   <div id="mainContent" class="hidden flex-1 flex flex-col">
     
-    <!-- Navbar (شريط التنقل العلوي مع زر الخروج) -->
-    <header class="bg-white border-b border-slate-100 sticky top-0 z-40">
+    <!-- Navbar -->
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-blue-500/20">
@@ -59,10 +57,9 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 md:gap-4">
           <span id="userGreeting" class="text-xs font-semibold text-slate-600 hidden md:inline-block"></span>
-          <!-- زر الخروج -->
-          <button id="logoutBtn" onclick="logout()" 
+          <button onclick="logout()" 
                   class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg text-xs font-bold transition-all flex items-center gap-1">
             <span>تسجيل الخروج</span>
             <span>🚪</span>
@@ -71,10 +68,10 @@
       </div>
     </header>
 
-    <!-- Body Content -->
-    <main class="max-w-6xl mx-auto px-4 py-6 space-y-6 flex-1 w-full">
+    <!-- Main Content Body -->
+    <main class="max-w-6xl mx-auto px-4 py-6 space-y-8 flex-1 w-full">
       
-      <!-- Admin Note Card -->
+      <!-- 1. Admin Note Card -->
       <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
         <div class="flex justify-between items-start mb-3">
           <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
@@ -86,12 +83,12 @@
         </div>
 
         <p id="adminNoteText" class="text-base md:text-lg font-bold leading-relaxed">
-          أهلاً بك في منصتك اليومية. استمر في التركيز، ولا تهمل حل مواضيع البكالوريا السابقة لتثبيت معلوماتك!
+          أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.
         </p>
 
-        <!-- Admin Edit Form (مخفي افتراضياً) -->
+        <!-- Admin Edit Area -->
         <div id="adminEditForm" class="hidden mt-4 pt-4 border-t border-white/20">
-          <textarea id="adminNoteInput" rows="3" 
+          <textarea id="adminNoteInput" rows="4" 
                     class="w-full p-3 rounded-xl text-slate-800 text-sm focus:outline-none font-medium" 
                     placeholder="اكتب التوجيه الجديد للطلبة هنا..."></textarea>
           <div class="flex justify-end gap-2 mt-2">
@@ -101,13 +98,56 @@
         </div>
       </div>
 
-      <!-- Welcome Card -->
-      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-xl">
+      <!-- 2. Hero Banner -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 md:p-8 text-white shadow-xl">
         <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold inline-block mb-3">
           منصتك الشاملة للبكالوريا 💡
         </span>
-        <h2 class="text-2xl font-black mb-2">نظم وقتك، راجع موادك، وحقق معدل أحلامك! 🎓</h2>
+        <h2 class="text-2xl md:text-3xl font-black mb-2">نظم وقتك، راجع موادك، وحقق معدل أحلامك! 🎓</h2>
         <p class="text-blue-100 text-xs md:text-sm">اختر القسم الذي تريد البدء به الآن من الخيارات أدناه لتنظيم مراجعتك بكل سهولة.</p>
+      </div>
+
+      <!-- 3. Main Sections Grid (الأقسام الرئيسية) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- قسم المواد الدراسية -->
+        <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">
+            📚
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">المواد الدراسية والمواضيع</h3>
+          <p class="text-slate-500 text-xs md:text-sm mb-4 leading-relaxed">
+            تصفح مواد البكالوريا، المواضيع السابقة، والملخصات المقترحة لكل مادة.
+          </p>
+          <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">الرياضيات 📐</button>
+            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">العلوم الفيزيائية ⚡</button>
+            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">علوم الطبيعة 🧬</button>
+            <button class="p-2.5 bg-slate-50 hover:bg-blue-50 hover:text-blue-600 rounded-lg border border-slate-100 text-center transition-all">اللغات والأدب 📖</button>
+          </div>
+        </div>
+
+        <!-- قسم الجدول الأسبوعي -->
+        <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-2xl font-bold mb-4">
+            📅
+          </div>
+          <h3 class="text-lg font-bold text-slate-800 mb-2">الجدول الأسبوعي الذكي</h3>
+          <p class="text-slate-500 text-xs md:text-sm mb-4 leading-relaxed">
+            برنامج مراجعة منظم يساعدك على توزيع وقتك بشكل متوازن على مدار الأسبوع.
+          </p>
+          <div class="p-4 bg-indigo-50/50 rounded-xl border border-indigo-100 text-indigo-900 text-xs space-y-2">
+            <div class="flex justify-between items-center font-bold">
+              <span>الفترة الصباحية:</span>
+              <span class="bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">مواد الحفظ والتركيز</span>
+            </div>
+            <div class="flex justify-between items-center font-bold">
+              <span>الفترة المسائية:</span>
+              <span class="bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded">حل التمارين والمواضيع</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </main>
@@ -119,9 +159,7 @@
 
   </div>
 
-  <!-- JavaScript Code -->
   <script>
-    // Elements
     const authModal = document.getElementById('authModal');
     const authForm = document.getElementById('authForm');
     const mainContent = document.getElementById('mainContent');
@@ -132,7 +170,6 @@
     const adminEditForm = document.getElementById('adminEditForm');
     const adminNoteInput = document.getElementById('adminNoteInput');
 
-    // 1. Check Authentication Status on Load
     function checkAuth() {
       const user = JSON.parse(localStorage.getItem('parkweb_user'));
       if (user && user.username) {
@@ -145,7 +182,6 @@
       }
     }
 
-    // 2. Handle Login Submit
     authForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const userData = {
@@ -156,7 +192,6 @@
       checkAuth();
     });
 
-    // 3. Logout Function (زر الخروج)
     function logout() {
       if (confirm("هل أنت تأكد من رغبتك في تسجيل الخروج؟")) {
         localStorage.removeItem('parkweb_user');
@@ -164,7 +199,6 @@
       }
     }
 
-    // 4. Admin Note Logic
     function loadAdminNote() {
       const savedNote = localStorage.getItem('parkweb_admin_note');
       if (savedNote) {
@@ -188,7 +222,6 @@
       }
     }
 
-    // Initialize Page
     document.addEventListener('DOMContentLoaded', () => {
       checkAuth();
       loadAdminNote();
@@ -196,4 +229,5 @@
   </script>
 </body>
 </html>
+
 
