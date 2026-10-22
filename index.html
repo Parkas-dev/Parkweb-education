@@ -127,12 +127,15 @@
 
                     <!-- Timer Circle / Display -->
                     <div class="py-6 bg-slate-50 rounded-2xl border border-slate-100">
-                        <span class="text-5xl font-black text-blue-600 font-mono tracking-tight">25:00</span>
-                        <p class="text-xs text-slate-400 mt-2">جلسة تركيز مركزة بدون مشتتات</p>
+                        <span id="timer-display" class="text-5xl font-black text-blue-600 font-mono tracking-tight">25:00</span>
+                        <p id="timer-status" class="text-xs text-slate-400 mt-2">جلسة تركيز مركزة بدون مشتتات</p>
                     </div>
 
-                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all">
+                    <button id="pomodoro-btn" onclick="togglePomodoro()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all">
                         ابدأ الجلسة الآن 🚀
+                    </button>
+                    <button id="reset-btn" onclick="resetPomodoro()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold py-2 px-4 rounded-xl transition-all text-xs hidden">
+                        إعادة ضبط 🔄
                     </button>
                 </div>
 
@@ -152,5 +155,71 @@
 
     </main>
 
+    <!-- JavaScript for Pomodoro Timer -->
+    <script>
+        let timerMinutes = 25;
+        let timerSeconds = 0;
+        let interval = null;
+        let isRunning = false;
+
+        const timerDisplay = document.getElementById('timer-display');
+        const timerBtn = document.getElementById('pomodoro-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const timerStatus = document.getElementById('timer-status');
+
+        function updateDisplay() {
+            let m = timerMinutes < 10 ? '0' + timerMinutes : timerMinutes;
+            let s = timerSeconds < 10 ? '0' + timerSeconds : timerSeconds;
+            timerDisplay.textContent = `${m}:${s}`;
+        }
+
+        function togglePomodoro() {
+            if (!isRunning) {
+                // Start timer
+                isRunning = true;
+                timerBtn.textContent = 'إيقاف مؤقت ⏸️';
+                timerBtn.className = 'w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-amber-100 transition-all';
+                resetBtn.classList.remove('hidden');
+                timerStatus.textContent = 'الوقت يسير.. استمر في التركيز!';
+
+                interval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                    } else if (timerMinutes > 0) {
+                        timerMinutes--;
+                        timerSeconds = 59;
+                    } else {
+                        // Timer finished
+                        clearInterval(interval);
+                        isRunning = false;
+                        timerBtn.textContent = 'ابدأ الجلسة الآن 🚀';
+                        timerBtn.className = 'w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all';
+                        timerStatus.textContent = 'انتهت الجلسة! خذ استراحة قصيرة ☕';
+                        alert('أحسنت! انتهت جلسة التركيز، خذ استراحة لمدة 5 دقائق.');
+                    }
+                    updateDisplay();
+                }, 1000);
+            } else {
+                // Pause timer
+                clearInterval(interval);
+                isRunning = false;
+                timerBtn.textContent = 'استئناف الجلسة ▶️';
+                timerBtn.className = 'w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-emerald-100 transition-all';
+                timerStatus.timerStatus = 'المؤقت متوقف مؤقتاً';
+            }
+        }
+
+        function resetPomodoro() {
+            clearInterval(interval);
+            isRunning = false;
+            timerMinutes = 25;
+            timerSeconds = 0;
+            updateDisplay();
+            timerBtn.textContent = 'ابدأ الجلسة الآن 🚀';
+            timerBtn.className = 'w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl shadow-md shadow-blue-100 transition-all';
+            resetBtn.classList.add('hidden');
+            timerStatus.textContent = 'جلسة تركيز مركزة بدون مشتتات';
+        }
+    </script>
 </body>
 </html>
