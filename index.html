@@ -40,7 +40,7 @@
         </div>
         <button type="submit" 
                 class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl shadow-xl shadow-blue-500/25 transition-all text-sm">
-‎          الدخول إلى المنصة 🚀
+          الدخول إلى المنصة 🚀
         </button>
       </form>
     </div>
@@ -80,11 +80,11 @@
       <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
         <div class="flex justify-between items-start mb-4">
           <span class="bg-white/20 backdrop-blur-md px-3.5 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-xs">
-‎            📌 توجيه اليوم
+            📌 توجيه اليوم
           </span>
         </div>
 
-‎        <!-- يُملأ من SITE_CONFIG.dailyNote في الأسفل -->
+        <!-- يُملأ من SITE_CONFIG.dailyNote في الأسفل -->
         <p id="adminNoteText" class="text-base md:text-xl font-bold leading-relaxed"></p>
       </div>
 
@@ -225,7 +225,7 @@
             <input type="text" id="taskTitle" required placeholder="المهمة أو المادة..." 
                    class="px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600 bg-slate-50 flex-1 min-w-[180px]">
             <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold rounded-xl text-xs shadow-md transition-all">
-‎              + إضافة للمهمة
+              + إضافة للمهمة
             </button>
           </form>
         </div>
@@ -254,10 +254,10 @@
 
       <h3 id="modalSubjectTitle" class="text-2xl font-black text-slate-900 mb-6">اسم المادة</h3>
 
-‎      <!-- تُملأ الأقسام من RESOURCES في الأسفل -->
+      <!-- تُملأ الأقسام من RESOURCES في الأسفل -->
       <div id="modalSections" class="space-y-5"></div>
 
-‎      <!-- قسم الأسئلة: يظهر زر التواصل فقط إذا ضبطت SITE_CONFIG.contactUrl -->
+      <!-- قسم الأسئلة: يظهر زر التواصل فقط إذا ضبطت SITE_CONFIG.contactUrl -->
       <div class="p-5 mt-5 bg-purple-50/50 rounded-2xl border border-purple-100">
         <h4 class="font-extrabold text-purple-900 text-sm mb-2 flex items-center gap-2"><span>❓</span> الأسئلة والاستفسارات</h4>
         <p id="contactText" class="text-slate-600 text-xs leading-relaxed">سيتم تفعيل هذه الخاصية قريباً.</p>
@@ -268,19 +268,19 @@
 
   <!-- ==================== JavaScript Application Logic ==================== -->
   <script>
-‎    // ============ إعدادات الموقع (عدّلها من هنا ثم ارفع التغيير إلى GitHub) ============
+    // ============ SITE SETTINGS (edit here, then commit to GitHub) ============
     const SITE_CONFIG = {
-‎      // توجيه اليوم: يظهر لكل الطلبة بعد نشر التعديل
+      // Daily note: shown to all students after you publish the change
       dailyNote: 'أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.',
-‎      // رابط التواصل لقسم الأسئلة (تيليغرام، واتساب، بريد...). اتركه فارغاً لإخفاء الزر.
-‎      // أمثلة: 'https://t.me/username'  أو  'mailto:you@example.com'
+      // Contact link for the questions section (Telegram, WhatsApp, email...). Leave empty to hide the button.
+      // Examples: 'https://t.me/username'  or  'mailto:you@example.com'
       contactUrl: ''
     };
 
-‎    // ============ محتوى المواد ============
-‎    // المفتاح = نفس العنوان الممرَّر إلى openSubjectModal في الأزرار أعلاه.
-‎    // أضف الروابط هنا، مثال:
-‎    // 'مادة الرياضيات 📐': {
+    // ============ SUBJECT CONTENT ============
+    // Key = the exact title passed to openSubjectModal in the buttons above.
+    // Add links here, for example:
+    // e.g.  'مادة الرياضيات 📐': {
     //   exams:     [{ title: 'موضوع بكالوريا 2025 - الشعبة العلمية', url: 'https://...' }],
     //   exercises: [{ title: 'تمارين الدوال', url: 'https://...' }],
     //   tips:      [{ title: 'حيلة دراسة الدالة', url: 'https://...' }]
@@ -293,14 +293,14 @@
       { key: 'tips',      icon: '💡', title: 'الأفكار الذهبية والحيل',      box: 'bg-emerald-50/50 border-emerald-100', head: 'text-emerald-900' }
     ];
 
-‎    // ============ أدوات مساعدة ============
+    // ============ HELPERS ============
     function esc(value) {
       return String(value).replace(/[&<>"']/g, ch => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
       }[ch]));
     }
 
-‎    // نسمح فقط بروابط http/https/mailto
+    // Only allow http/https/mailto links
     function safeUrl(url) {
       try {
         const u = new URL(url, location.href);
@@ -322,10 +322,10 @@
     function writeJSON(key, value) {
       try {
         localStorage.setItem(key, JSON.stringify(value));
-      } catch (e) { /* التخزين غير متاح (وضع التصفح الخاص مثلاً) */ }
+      } catch (e) { /* storage unavailable (e.g. private mode) */ }
     }
 
-‎    // ============ العناصر ============
+    // ============ ELEMENTS ============
     const authModal = document.getElementById('authModal');
     const authForm = document.getElementById('authForm');
     const mainContent = document.getElementById('mainContent');
@@ -333,7 +333,7 @@
     const userGreeting = document.getElementById('userGreeting');
     const adminNoteText = document.getElementById('adminNoteText');
 
-‎    // ============ الدخول (اسم محلي على الجهاز) ============
+    // ============ ENTRY (local name on this device) ============
     function checkAuth() {
       const user = readJSON('parkweb_user', null);
       if (user && user.username) {
@@ -362,12 +362,12 @@
       }
     }
 
-‎    // ============ توجيه اليوم ============
+    // ============ DAILY NOTE ============
     function loadAdminNote() {
       adminNoteText.textContent = SITE_CONFIG.dailyNote;
     }
 
-‎    // ============ نافذة المادة ============
+    // ============ SUBJECT MODAL ============
     const subjectModal = document.getElementById('subjectModal');
     const modalSubjectTitle = document.getElementById('modalSubjectTitle');
     const modalSections = document.getElementById('modalSections');
@@ -420,7 +420,7 @@
       if (e.key === 'Escape') closeSubjectModal();
     });
 
-‎    // ============ الجدول اليومي ============
+    // ============ DAILY SCHEDULE ============
     const taskForm = document.getElementById('taskForm');
     const taskTime = document.getElementById('taskTime');
     const taskTitle = document.getElementById('taskTitle');
@@ -453,7 +453,7 @@
               ${task.completed ? 'منجز ✓' : 'إنجاز'}
             </button>
             <button onclick="deleteTask(${index})" class="px-2.5 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-xl hover:bg-red-100 transition-all">
-‎              حذف 🗑️
+              حذف 🗑️
             </button>
           </div>
         </div>
@@ -489,7 +489,7 @@
       renderTasks();
     }
 
-‎    // ============ التشغيل ============
+    // ============ INIT ============
     document.addEventListener('DOMContentLoaded', () => {
       checkAuth();
       loadAdminNote();
@@ -498,3 +498,4 @@
   </script>
 </body>
 </html>
+
