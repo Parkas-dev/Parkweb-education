@@ -16,7 +16,7 @@
 
     <div>
         <!-- Navbar / Header -->
-        <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <header class="bg-white/85 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
                 <!-- Logo & Brand -->
                 <div class="flex items-center gap-3 cursor-pointer group" onclick="showSection('home')">
@@ -54,6 +54,24 @@
             <!-- HOME VIEW (Default) -->
             <div id="home-view" class="space-y-8">
                 
+                <!-- DAILY ADMIN NOTE / ANNOUNCEMENT BOX (NEW!) -->
+                <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-orange-100 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="space-y-2 max-w-3xl">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-white/20 backdrop-blur-md text-xs font-bold px-3 py-1 rounded-full">📌 ملاحظة وتوجيه اليوم للطلبة</span>
+                            <span id="note-date" class="text-xs text-amber-100 font-mono">محدث اليوم</span>
+                        </div>
+                        <!-- The Dynamic Note Text -->
+                        <p id="daily-note-text" class="text-base sm:text-lg font-bold leading-relaxed">
+                            أهلاً بك في منصتك اليومية. استمر في التركيز، ولا تهمل حل مواضيع البكالوريا السابقة لتثبيت معلوماتك!
+                        </p>
+                    </div>
+                    <!-- Admin Edit Button -->
+                    <button onclick="editDailyNote()" class="bg-white text-orange-600 hover:bg-orange-50 font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-2xl shadow-md transition-all flex items-center gap-1.5 shrink-0">
+                        <span>✏️</span> تعديل الملاحظة (للإدارة)
+                    </button>
+                </div>
+
                 <!-- Hero Banner -->
                 <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 rounded-3xl p-8 sm:p-10 text-white shadow-xl shadow-blue-100 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="relative z-10 space-y-3 max-w-2xl">
@@ -102,19 +120,16 @@
                 </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Math -->
                     <div onclick="openSubject('math')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
                         <div class="text-3xl">📐</div>
                         <h4 class="font-bold text-lg text-slate-900">رياضيات</h4>
                         <p class="text-xs text-slate-500">الدوال، المتتاليات، الأعداد المركبة...</p>
                     </div>
-                    <!-- Physics -->
                     <div onclick="openSubject('physics')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-indigo-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
                         <div class="text-3xl">⚗️</div>
                         <h4 class="font-bold text-lg text-slate-900">العلوم الفيزيائية</h4>
                         <p class="text-xs text-slate-500">الميكانيك، الكهرباء، التطور الكيميائي...</p>
                     </div>
-                    <!-- Science -->
                     <div onclick="openSubject('science')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
                         <div class="text-3xl">🧬</div>
                         <h4 class="font-bold text-lg text-slate-900">علوم الطبيعة والحياة</h4>
@@ -176,6 +191,26 @@
 
     <!-- JavaScript -->
     <script>
+        // --- Load Daily Admin Note on Startup ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedNote = localStorage.getItem('parkweb_daily_note');
+            if (savedNote) {
+                document.getElementById('daily-note-text').textContent = savedNote;
+            }
+        });
+
+        // --- Edit Daily Note Function ---
+        function editDailyNote() {
+            const currentText = document.getElementById('daily-note-text').textContent;
+            const newNote = prompt("اكتب توجيه أو ملاحظة اليوم للطلبة:", currentText);
+            
+            if (newNote !== null && newNote.trim() !== "") {
+                localStorage.setItem('parkweb_daily_note', newNote.trim());
+                document.getElementById('daily-note-text').textContent = newNote.trim();
+                alert("تم تحديث ملاحظة اليوم بنجاح! 🚀");
+            }
+        }
+
         const scheduleData = {
             sat: {
                 day: "يوم السبت - التركيز على الرياضيات والعلوم",
@@ -241,7 +276,6 @@
         }
 
         function switchDay(dayKey) {
-            // Update tabs UI
             document.querySelectorAll('.day-tab').forEach(tab => {
                 tab.className = "day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all";
             });
@@ -250,7 +284,6 @@
                 activeTab.className = "day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-blue-600 text-white shadow-md transition-all";
             }
 
-            // Update content
             const data = scheduleData[dayKey];
             const contentBox = document.getElementById('schedule-content');
             if (data && contentBox) {
@@ -267,4 +300,5 @@
     </script>
 </body>
 </html>
+
 
