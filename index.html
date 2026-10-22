@@ -1,304 +1,199 @@
-<!DOCTYPE html>
+<!DOCTYPE DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parkweb Education - منصة مرافقة البكالوريا</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Cairo Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Cairo', sans-serif; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parkweb Education - منصة طالب البكالوريا</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
 
-    <div>
-        <!-- Navbar / Header -->
-        <header class="bg-white/85 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
-                <!-- Logo & Brand -->
-                <div class="flex items-center gap-3 cursor-pointer group" onclick="showSection('home')">
-                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-blue-200 group-hover:scale-105 transition-all">
-                        P
-                    </div>
-                    <div>
-                        <h1 class="font-extrabold text-lg text-slate-900 leading-tight">Parkweb Education</h1>
-                        <p class="text-xs text-slate-500">منصة تنظيم ومرافقة طالب البكالوريا</p>
-                    </div>
-                </div>
-
-                <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                    <button onclick="showSection('home')" class="hover:text-blue-600 transition-colors">الرئيسية</button>
-                    <button onclick="showSection('subjects')" class="hover:text-blue-600 transition-colors">المواد الدراسية</button>
-                    <button onclick="showSection('schedule')" class="hover:text-blue-600 transition-colors">الجدول الأسبوعي</button>
-                </nav>
-
-                <!-- User Profile / Actions -->
-                <div class="flex items-center gap-3">
-                    <button onclick="showSection('home')" class="text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3.5 py-2 rounded-xl transition-all">
-                        🏠 الرئيسية
-                    </button>
-                    <div class="w-10 h-10 rounded-full bg-blue-50 border-2 border-blue-500/30 flex items-center justify-center text-blue-700 font-bold text-sm shadow-sm">
-                        BAC
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Content Area -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-
-            <!-- HOME VIEW (Default) -->
-            <div id="home-view" class="space-y-8">
-                
-                <!-- DAILY ADMIN NOTE / ANNOUNCEMENT BOX (NEW!) -->
-                <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-orange-100 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div class="space-y-2 max-w-3xl">
-                        <div class="flex items-center gap-2">
-                            <span class="bg-white/20 backdrop-blur-md text-xs font-bold px-3 py-1 rounded-full">📌 ملاحظة وتوجيه اليوم للطلبة</span>
-                            <span id="note-date" class="text-xs text-amber-100 font-mono">محدث اليوم</span>
-                        </div>
-                        <!-- The Dynamic Note Text -->
-                        <p id="daily-note-text" class="text-base sm:text-lg font-bold leading-relaxed">
-                            أهلاً بك في منصتك اليومية. استمر في التركيز، ولا تهمل حل مواضيع البكالوريا السابقة لتثبيت معلوماتك!
-                        </p>
-                    </div>
-                    <!-- Admin Edit Button -->
-                    <button onclick="editDailyNote()" class="bg-white text-orange-600 hover:bg-orange-50 font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-2xl shadow-md transition-all flex items-center gap-1.5 shrink-0">
-                        <span>✏️</span> تعديل الملاحظة (للإدارة)
-                    </button>
-                </div>
-
-                <!-- Hero Banner -->
-                <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 rounded-3xl p-8 sm:p-10 text-white shadow-xl shadow-blue-100 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="relative z-10 space-y-3 max-w-2xl">
-                        <span class="inline-block bg-white/20 backdrop-blur-md text-xs font-semibold px-3.5 py-1.5 rounded-full">منصتك الشاملة للبكالوريا 💡</span>
-                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-snug">نظم وقتك، راجع موادك، وحقق معدل أحلامك! 🎓</h2>
-                        <p class="text-blue-100 text-sm sm:text-base leading-relaxed">اختر القسم الذي تريد البدء به الآن من الخيارات أدناه لتنظيم مراجعتك بكل سهولة.</p>
-                    </div>
-                </div>
-
-                <!-- Main Quick Action Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Subjects Card -->
-                    <div onclick="showSection('subjects')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer group space-y-4">
-                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-3xl group-hover:bg-blue-600 group-hover:text-white transition-all">
-                            📚
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-xl group-hover:text-blue-600">المواد الدراسية والمواضيع</h3>
-                            <p class="text-sm text-slate-500 mt-1">تصفح مواد البكالوريا، المواضيع السابقة والتصحيحات الرسمية.</p>
-                        </div>
-                        <span class="text-xs font-bold text-blue-600 inline-block">دخول قسم المواد &larr;</span>
-                    </div>
-
-                    <!-- Schedule Card -->
-                    <div onclick="showSection('schedule')" class="bg-white p-6 rounded-3xl border border-slate-200/80 hover:border-indigo-500 hover:shadow-xl transition-all cursor-pointer group space-y-4">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-3xl group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                            📅
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-slate-900 text-xl group-hover:text-indigo-600">الجدول الأسبوعي الذكي</h3>
-                            <p class="text-sm text-slate-500 mt-1">برنامج مراجعة منظم وموزع بشكل متوازن على مدار الأسبوع.</p>
-                        </div>
-                        <span class="text-xs font-bold text-indigo-600 inline-block">استعرض الجدول &larr;</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- SUBJECTS VIEW -->
-            <div id="subjects-view" class="hidden space-y-6">
-                <div class="flex items-center justify-between">
-                    <h3 class="font-extrabold text-slate-900 text-xl flex items-center gap-2">
-                        <span>📚</span> المواد الدراسية والشعب العلمية:
-                    </h3>
-                    <button onclick="showSection('home')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-bold">&larr; العودة</button>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div onclick="openSubject('math')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-blue-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
-                        <div class="text-3xl">📐</div>
-                        <h4 class="font-bold text-lg text-slate-900">رياضيات</h4>
-                        <p class="text-xs text-slate-500">الدوال، المتتاليات، الأعداد المركبة...</p>
-                    </div>
-                    <div onclick="openSubject('physics')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-indigo-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
-                        <div class="text-3xl">⚗️</div>
-                        <h4 class="font-bold text-lg text-slate-900">العلوم الفيزيائية</h4>
-                        <p class="text-xs text-slate-500">الميكانيك، الكهرباء، التطور الكيميائي...</p>
-                    </div>
-                    <div onclick="openSubject('science')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition-all cursor-pointer space-y-3">
-                        <div class="text-3xl">🧬</div>
-                        <h4 class="font-bold text-lg text-slate-900">علوم الطبيعة والحياة</h4>
-                        <p class="text-xs text-slate-500">تركيب البروتين، الإنزيمات، المناعة...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- WEEKLY SCHEDULE VIEW -->
-            <div id="schedule-view" class="hidden space-y-6">
-                <div class="flex items-center justify-between bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
-                    <div>
-                        <h2 class="text-xl font-extrabold text-slate-900">📅 الجدول الأسبوعي الذكي للمراجعة</h2>
-                        <p class="text-xs text-slate-500 mt-1">توزيع متوازن للمواد العلمية والأدبية لضمان الاستيعاب الكامل</p>
-                    </div>
-                    <button onclick="showSection('home')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-2 rounded-xl font-bold">&larr; العودة</button>
-                </div>
-
-                <!-- Days Tabs -->
-                <div class="flex items-center gap-2 overflow-x-auto pb-2">
-                    <button onclick="switchDay('sat')" id="tab-sat" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-blue-600 text-white shadow-md transition-all">السبت</button>
-                    <button onclick="switchDay('sun')" id="tab-sun" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الأحد</button>
-                    <button onclick="switchDay('mon')" id="tab-mon" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الإثنين</button>
-                    <button onclick="switchDay('tue')" id="tab-tue" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الثلاثاء</button>
-                    <button onclick="switchDay('wed')" id="tab-wed" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الأربعاء</button>
-                    <button onclick="switchDay('thu')" id="tab-thu" class="day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">الخميس</button>
-                </div>
-
-                <!-- Schedule Content Box -->
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4" id="schedule-content">
-                    <!-- Content injected via JS -->
-                </div>
-            </div>
-
-            <!-- SUBJECT DETAIL VIEW -->
-            <div id="subject-detail-view" class="hidden space-y-6">
-                <div class="flex items-center justify-between bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <button onclick="showSection('subjects')" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs">&larr; مواد أخرى</button>
-                        <h2 id="subject-detail-title" class="text-xl font-extrabold text-slate-900">المادة</h2>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl border border-slate-200 space-y-4">
-                    <h3 class="font-bold text-slate-900">📄 المواضيع والبكالوريات السابقة</h3>
-                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
-                        <span class="text-sm font-semibold">بكالوريا 2025 - الموضوع الأول + الحل</span>
-                        <a href="#" class="text-xs bg-blue-600 text-white font-bold px-4 py-2 rounded-xl">تحميل 📥</a>
-                    </div>
-                </div>
-            </div>
-
-        </main>
+  <!-- ==================== Auth Modal (نافذة التسجيل) ==================== -->
+  <div id="authModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-100 max-w-md w-full p-6 text-center transform transition-all">
+      <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+        🎓
+      </div>
+      <h2 class="text-2xl font-extrabold text-slate-800 mb-2">مرحباً بك في Parkweb Education</h2>
+      <p class="text-slate-500 text-sm mb-6">يرجى إدخال بياناتك للدخول إلى المنصة والاستفادة من كافة الدروس والتوجيهات.</p>
+      
+      <form id="authForm" class="space-y-4 text-right">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">اسم المستخدم</label>
+          <input type="text" id="usernameInput" required placeholder="أدخل اسمك هنا..." 
+                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">البريد الإلكتروني</label>
+          <input type="email" id="emailInput" required placeholder="example@domain.com" 
+                 class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+        </div>
+        <button type="submit" 
+                class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-200 text-sm">
+          الدخول إلى المنصة 🚀
+        </button>
+      </form>
     </div>
+  </div>
+
+  <!-- ==================== Main App Interface (الواجهة الرئيسية) ==================== -->
+  <div id="mainContent" class="hidden flex-1 flex flex-col">
+    
+    <!-- Navbar (شريط التنقل العلوي مع زر الخروج) -->
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-blue-500/20">
+            P
+          </div>
+          <div>
+            <h1 class="font-bold text-slate-800 text-base leading-tight">Parkweb Education</h1>
+            <p class="text-[10px] text-slate-400 font-medium">منصة تنظيم ومرافقة طالب البكالوريا</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span id="userGreeting" class="text-xs font-semibold text-slate-600 hidden md:inline-block"></span>
+          <!-- زر الخروج -->
+          <button id="logoutBtn" onclick="logout()" 
+                  class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg text-xs font-bold transition-all flex items-center gap-1">
+            <span>تسجيل الخروج</span>
+            <span>🚪</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Body Content -->
+    <main class="max-w-6xl mx-auto px-4 py-6 space-y-6 flex-1 w-full">
+      
+      <!-- Admin Note Card -->
+      <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
+        <div class="flex justify-between items-start mb-3">
+          <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+            📌 ملاحظة وتوجيه اليوم للطلبة
+          </span>
+          <button onclick="toggleAdminEdit()" class="text-xs bg-white text-orange-600 hover:bg-orange-50 font-bold px-3 py-1 rounded-lg transition-all shadow-sm">
+            ✏️ تعديل الملاحظة (للإدارة)
+          </button>
+        </div>
+
+        <p id="adminNoteText" class="text-base md:text-lg font-bold leading-relaxed">
+          أهلاً بك في منصتك اليومية. استمر في التركيز، ولا تهمل حل مواضيع البكالوريا السابقة لتثبيت معلوماتك!
+        </p>
+
+        <!-- Admin Edit Form (مخفي افتراضياً) -->
+        <div id="adminEditForm" class="hidden mt-4 pt-4 border-t border-white/20">
+          <textarea id="adminNoteInput" rows="3" 
+                    class="w-full p-3 rounded-xl text-slate-800 text-sm focus:outline-none font-medium" 
+                    placeholder="اكتب التوجيه الجديد للطلبة هنا..."></textarea>
+          <div class="flex justify-end gap-2 mt-2">
+            <button onclick="toggleAdminEdit()" class="px-3 py-1.5 text-xs font-bold bg-white/20 hover:bg-white/30 rounded-lg">إلغاء</button>
+            <button onclick="saveAdminNote()" class="px-4 py-1.5 text-xs font-bold bg-slate-900 text-white rounded-lg hover:bg-slate-800">حفظ ونشر</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Welcome Card -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 text-white shadow-xl">
+        <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold inline-block mb-3">
+          منصتك الشاملة للبكالوريا 💡
+        </span>
+        <h2 class="text-2xl font-black mb-2">نظم وقتك، راجع موادك، وحقق معدل أحلامك! 🎓</h2>
+        <p class="text-blue-100 text-xs md:text-sm">اختر القسم الذي تريد البدء به الآن من الخيارات أدناه لتنظيم مراجعتك بكل سهولة.</p>
+      </div>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 mt-16 py-6 text-center text-xs text-slate-500">
-        جميع الحقوق محفوظة &copy; 2026 - Parkweb Education (Parkas-dev) 🎓
+    <footer class="bg-white border-t border-slate-100 py-4 text-center text-xs text-slate-400">
+      <p>© 2026 Parkweb Education - جميع الحقوق محفوظة</p>
     </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // --- Load Daily Admin Note on Startup ---
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedNote = localStorage.getItem('parkweb_daily_note');
-            if (savedNote) {
-                document.getElementById('daily-note-text').textContent = savedNote;
-            }
-        });
+  </div>
 
-        // --- Edit Daily Note Function ---
-        function editDailyNote() {
-            const currentText = document.getElementById('daily-note-text').textContent;
-            const newNote = prompt("اكتب توجيه أو ملاحظة اليوم للطلبة:", currentText);
-            
-            if (newNote !== null && newNote.trim() !== "") {
-                localStorage.setItem('parkweb_daily_note', newNote.trim());
-                document.getElementById('daily-note-text').textContent = newNote.trim();
-                alert("تم تحديث ملاحظة اليوم بنجاح! 🚀");
-            }
-        }
+  <!-- JavaScript Code -->
+  <script>
+    // Elements
+    const authModal = document.getElementById('authModal');
+    const authForm = document.getElementById('authForm');
+    const mainContent = document.getElementById('mainContent');
+    const usernameInput = document.getElementById('usernameInput');
+    const emailInput = document.getElementById('emailInput');
+    const userGreeting = document.getElementById('userGreeting');
+    const adminNoteText = document.getElementById('adminNoteText');
+    const adminEditForm = document.getElementById('adminEditForm');
+    const adminNoteInput = document.getElementById('adminNoteInput');
 
-        const scheduleData = {
-            sat: {
-                day: "يوم السبت - التركيز على الرياضيات والعلوم",
-                morning: "☀️ الصباح: رياضيات (حل تمارين الدوال / المتتاليات) - ساعتان",
-                evening: "🌙 المساء: علوم طبيعية (مراجعة آليات تركيب البروتين + رسم التخطيطي)",
-                night: "✨ الليل: لغة إنجليزية (حل موضوع بكالوريا سابق)"
-            },
-            sun: {
-                day: "يوم الأحد - الفيزياء والعلوم الشرعية",
-                morning: "☀️ الصباح: علوم فيزيائية (المتابعة الزمنية والتحول الكيميائي)",
-                evening: "🌙 المساء: علوم إسلامية (حفظ وتكرار 2 دروس مع حل الأسئلة)",
-                night: "✨ الليل: رياضيات (حل 3 تمارين سريعة)"
-            },
-            mon: {
-                day: "يوم الإثنين - علوم الطبيعة والفلسفة",
-                morning: "☀️ الصباح: علوم طبيعية (حل تمارينات منهجية الإجابة)",
-                evening: "🌙 المساء: فلسفة (قراءة ومراجعة مقالة فلسفية ومخططها)",
-                night: "✨ الليل: لغة عربية (قواعد وبلاغة)"
-            },
-            tue: {
-                day: "يوم الثلاثاء - رياضيات وفيزياء تكثيفي",
-                morning: "☀️ الصباح: رياضيات (حل موضوع بكالوريا كامل بحساب الوقت)",
-                evening: "🌙 المساء: علوم فيزيائية (الكهرباء RC و RL)",
-                night: "✨ الليل: لغة فرنسية (Compte rendu)"
-            },
-            wed: {
-                day: "يوم الأربعاء - حفظ وتحضير التاريخ والجغرافيا",
-                morning: "☀️ الصباح: تاريخ وجغرافيا (حفظ المصطلحات والشخصيات)",
-                evening: "🌙 المساء: رياضيات أو علوم (مراجعة النقاط الضعيفة)",
-                night: "✨ الليل: استراحة أو مراجعة خفيفة"
-            },
-            thu: {
-                day: "يوم الخميس - المراجعة الشاملة وتقييم الأسبوع",
-                morning: "☀️ الصباح: حل مواضيع بكالوريا سابقة مقترحة",
-                evening: "🌙 المساء: مراجعة ملخصات الأسبوع كاملاً",
-                night: "✨ الليل: تنظيم جدول الأسبوع القادم وتجهيز الملفات"
-            }
-        };
+    // 1. Check Authentication Status on Load
+    function checkAuth() {
+      const user = JSON.parse(localStorage.getItem('parkweb_user'));
+      if (user && user.username) {
+        authModal.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        userGreeting.textContent = `أهلاً بك، ${user.username} 👋`;
+      } else {
+        authModal.classList.remove('hidden');
+        mainContent.classList.add('hidden');
+      }
+    }
 
-        function showSection(section) {
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('subjects-view').classList.add('hidden');
-            document.getElementById('schedule-view').classList.add('hidden');
-            document.getElementById('subject-detail-view').classList.add('hidden');
+    // 2. Handle Login Submit
+    authForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userData = {
+        username: usernameInput.value.trim(),
+        email: emailInput.value.trim()
+      };
+      localStorage.setItem('parkweb_user', JSON.stringify(userData));
+      checkAuth();
+    });
 
-            if (section === 'home') document.getElementById('home-view').classList.remove('hidden');
-            if (section === 'subjects') document.getElementById('subjects-view').classList.remove('hidden');
-            if (section === 'schedule') {
-                document.getElementById('schedule-view').classList.remove('hidden');
-                switchDay('sat');
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    // 3. Logout Function (زر الخروج)
+    function logout() {
+      if (confirm("هل أنت تأكد من رغبتك في تسجيل الخروج؟")) {
+        localStorage.removeItem('parkweb_user');
+        checkAuth();
+      }
+    }
 
-        function openSubject(name) {
-            showSection('subject-detail');
-            document.getElementById('subject-detail-view').classList.remove('hidden');
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('subjects-view').classList.add('hidden');
-            
-            const titles = { math: 'الرياضيات', physics: 'العلوم الفيزيائية', science: 'علوم الطبيعة والحياة' };
-            document.getElementById('subject-detail-title').textContent = titles[name] || 'المادة';
-        }
+    // 4. Admin Note Logic
+    function loadAdminNote() {
+      const savedNote = localStorage.getItem('parkweb_admin_note');
+      if (savedNote) {
+        adminNoteText.textContent = savedNote;
+      }
+    }
 
-        function switchDay(dayKey) {
-            document.querySelectorAll('.day-tab').forEach(tab => {
-                tab.className = "day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all";
-            });
-            const activeTab = document.getElementById(`tab-${dayKey}`);
-            if (activeTab) {
-                activeTab.className = "day-tab px-5 py-2.5 rounded-2xl font-bold text-sm bg-blue-600 text-white shadow-md transition-all";
-            }
+    function toggleAdminEdit() {
+      adminEditForm.classList.toggle('hidden');
+      if (!adminEditForm.classList.contains('hidden')) {
+        adminNoteInput.value = adminNoteText.textContent.trim();
+      }
+    }
 
-            const data = scheduleData[dayKey];
-            const contentBox = document.getElementById('schedule-content');
-            if (data && contentBox) {
-                contentBox.innerHTML = `
-                    <h3 class="font-extrabold text-blue-700 text-lg border-b border-slate-100 pb-3">${data.day}</h3>
-                    <div class="space-y-3 pt-2">
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-semibold text-slate-800">${data.morning}</div>
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-semibold text-slate-800">${data.evening}</div>
-                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-semibold text-slate-800">${data.night}</div>
-                    </div>
-                `;
-            }
-        }
-    </script>
+    function saveAdminNote() {
+      const newNote = adminNoteInput.value.trim();
+      if (newNote) {
+        localStorage.setItem('parkweb_admin_note', newNote);
+        adminNoteText.textContent = newNote;
+        toggleAdminEdit();
+      }
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      loadAdminNote();
+    });
+  </script>
 </body>
 </html>
-
 
