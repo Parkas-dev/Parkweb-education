@@ -6,6 +6,10 @@
   <title>Parkweb Education - منصة طالب البكالوريا الشاملة</title>
   <meta name="description" content="منصة عربية لمرافقة طالب البكالوريا: مواضيع وتمارين وأفكار لكل المواد، وجدول يومي لتنظيم المراجعة.">
   <meta name="theme-color" content="#2563eb">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Parkweb">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Parkweb Education - منصة طالب البكالوريا الشاملة">
   <meta property="og:description" content="مواضيع وتمارين وأفكار لكل مواد البكالوريا، وجدول يومي لتنظيم المراجعة.">
@@ -86,6 +90,31 @@
 
         <!-- يُملأ من SITE_CONFIG.dailyNote في الأسفل -->
         <p id="adminNoteText" class="text-base md:text-xl font-bold leading-relaxed"></p>
+      </div>
+
+      <!-- Stats: countdown / tasks / streak -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm">
+          <p class="text-xs font-bold text-slate-400 mb-1">⏳ المتبقي على البكالوريا</p>
+          <p class="text-3xl font-black text-blue-600"><span id="countdownDays">--</span> <span class="text-sm font-bold text-slate-500">يوماً</span></p>
+          <p id="countdownNote" class="text-[11px] text-slate-400 mt-1"></p>
+        </div>
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm">
+          <p class="text-xs font-bold text-slate-400 mb-1">✅ مهامك المنجزة</p>
+          <p class="text-3xl font-black text-emerald-600"><span id="tasksDone">0</span><span class="text-lg text-slate-400">/<span id="tasksTotal">0</span></span></p>
+          <div class="h-2 bg-slate-100 rounded-full mt-2 overflow-hidden"><div id="tasksBar" class="h-full bg-emerald-500 rounded-full transition-all" style="width:0%"></div></div>
+        </div>
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-sm">
+          <p class="text-xs font-bold text-slate-400 mb-1">🔥 أيام المراجعة المتتالية</p>
+          <p class="text-3xl font-black text-orange-500"><span id="streakDays">0</span> <span class="text-sm font-bold text-slate-500">يوماً</span></p>
+          <p class="text-[11px] text-slate-400 mt-1">أنجز مهمة أو جلسة تركيز لتحافظ عليها.</p>
+        </div>
+      </div>
+
+      <!-- Quote of the day -->
+      <div class="bg-indigo-600 text-white rounded-3xl p-5 md:p-6 shadow-sm">
+        <p class="text-[11px] font-bold text-indigo-200 mb-1.5">💬 عبارة اليوم</p>
+        <p id="quoteText" class="text-sm md:text-base font-bold leading-relaxed"></p>
       </div>
 
       <!-- 2. Comprehensive Subjects Hub Section -->
@@ -205,6 +234,63 @@
 
       </div>
 
+      <!-- Tools: Pomodoro + Average calculator -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Pomodoro -->
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center text-2xl shadow-xs">⏱️</div>
+            <div>
+              <h3 class="text-lg font-black text-slate-900">مؤقت التركيز</h3>
+              <p class="text-slate-500 text-xs font-medium">راجع بتركيز كامل، ثم خذ استراحة قصيرة.</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 mb-5" id="pomoModes">
+            <button type="button" data-mode="focus" data-min="25" class="pomo-mode px-3.5 py-2 rounded-xl text-xs font-extrabold border border-slate-200">تركيز 25</button>
+            <button type="button" data-mode="focus" data-min="50" class="pomo-mode px-3.5 py-2 rounded-xl text-xs font-extrabold border border-slate-200">تركيز 50</button>
+            <button type="button" data-mode="break" data-min="5" class="pomo-mode px-3.5 py-2 rounded-xl text-xs font-extrabold border border-slate-200">راحة 5</button>
+            <button type="button" data-mode="break" data-min="15" class="pomo-mode px-3.5 py-2 rounded-xl text-xs font-extrabold border border-slate-200">راحة 15</button>
+          </div>
+          <p id="pomoDisplay" dir="ltr" class="text-6xl font-black text-center text-slate-900 tabular-nums py-4">25:00</p>
+          <p id="pomoStatus" class="text-center text-xs font-bold text-slate-400 mb-4">جاهز للبدء</p>
+          <div class="flex justify-center gap-3">
+            <button type="button" id="pomoToggle" class="px-6 py-3 bg-rose-600 hover:bg-rose-700 text-white font-extrabold rounded-xl text-sm shadow-md transition-all">ابدأ</button>
+            <button type="button" id="pomoReset" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold rounded-xl text-sm transition-all">إعادة</button>
+          </div>
+          <p class="text-center text-xs font-bold text-slate-500 mt-4">جلسات التركيز المكتملة اليوم: <span id="pomoCount">0</span></p>
+        </div>
+
+        <!-- Average calculator -->
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-sm">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center text-2xl shadow-xs">🧮</div>
+            <div>
+              <h3 class="text-lg font-black text-slate-900">حاسبة المعدل</h3>
+              <p class="text-slate-500 text-xs font-medium">احسب معدلك المتوقع في البكالوريا.</p>
+            </div>
+          </div>
+          <label for="gradeStream" class="block text-xs font-bold text-slate-700 mb-1.5">الشعبة</label>
+          <select id="gradeStream" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 text-xs font-bold bg-slate-50 mb-4 focus:outline-none focus:ring-2 focus:ring-teal-600">
+            <option value="sciences">علوم تجريبية</option>
+            <option value="math">رياضيات</option>
+            <option value="tech">تقني رياضي</option>
+            <option value="mgmt">تسيير واقتصاد</option>
+            <option value="lit">آداب وفلسفة</option>
+            <option value="lang">لغات أجنبية</option>
+          </select>
+          <div class="grid grid-cols-[1fr_4.5rem_4.5rem] gap-2 text-[11px] font-extrabold text-slate-400 mb-2 px-1">
+            <span>المادة</span><span class="text-center">العلامة</span><span class="text-center">المعامل</span>
+          </div>
+          <div id="gradeRows" class="space-y-2"></div>
+          <div class="flex items-center gap-3 mt-4">
+            <button type="button" id="gradeCalc" class="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-extrabold rounded-xl text-xs shadow-md transition-all">احسب المعدل</button>
+            <p id="gradeResult" class="text-sm font-black text-slate-900"></p>
+          </div>
+          <p id="gradeNote" class="text-[11px] text-slate-400 mt-3 leading-relaxed"></p>
+        </div>
+      </div>
+
       <!-- 3. Interactive Daily Schedule Planner -->
       <div class="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-sm">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
@@ -234,6 +320,55 @@
         <div id="taskList" class="space-y-3">
           <!-- Dynamically populated tasks -->
         </div>
+        <div class="mt-4 text-left">
+          <button type="button" onclick="clearCompleted()" class="text-xs font-bold text-slate-400 hover:text-red-600 transition-all">🧹 مسح المهام المنجزة</button>
+        </div>
+      </div>
+
+      <!-- 4. Study tips -->
+      <div class="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-2xl shadow-xs">🎯</div>
+          <div>
+            <h3 class="text-xl font-black text-slate-900">نصائح للمراجعة الفعّالة</h3>
+            <p class="text-slate-500 text-xs font-medium">عادات بسيطة تصنع فرقاً كبيراً قبل البكالوريا.</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <h5 class="font-extrabold text-slate-900 text-sm mb-1">📆 خطّط لأسبوعك</h5>
+            <p class="text-slate-500 text-xs leading-relaxed">وزّع المواد حسب معاملاتها، وخصّص وقتاً أكبر للمواد الأثقل والأضعف عندك.</p>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <h5 class="font-extrabold text-slate-900 text-sm mb-1">📝 حلّ مواضيع سابقة بوقت حقيقي</h5>
+            <p class="text-slate-500 text-xs leading-relaxed">أغلق الكتاب وحاكِ ظروف الامتحان بمدّته كاملة، ثم صحّح بنفسك.</p>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <h5 class="font-extrabold text-slate-900 text-sm mb-1">📒 دفتر الأخطاء</h5>
+            <p class="text-slate-500 text-xs leading-relaxed">دوّن كل خطأ وسببه والطريقة الصحيحة، وراجع الدفتر كل أسبوع.</p>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <h5 class="font-extrabold text-slate-900 text-sm mb-1">🔁 المراجعة المتباعدة</h5>
+            <p class="text-slate-500 text-xs leading-relaxed">راجع الدرس بعد يوم، ثم بعد أسبوع، ثم بعد شهر. التكرار المتباعد يثبّت المعلومة.</p>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <h5 class="font-extrabold text-slate-900 text-sm mb-1">📵 ابعد هاتفك أثناء التركيز</h5>
+            <p class="text-slate-500 text-xs leading-relaxed">جلسة 25 دقيقة بلا إشعارات أنفع من ساعتين مشتّتة.</p>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+            <h5 class="font-extrabold text-slate-900 text-sm mb-1">😴 نم جيداً وتغذَّ جيداً</h5>
+            <p class="text-slate-500 text-xs leading-relaxed">الذاكرة تتثبّت أثناء النوم. لا تضحِّ بنومك ليلة الامتحان.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Share -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-black mb-1">أفادتك المنصة؟ شاركها مع زملائك 🤝</h3>
+          <p class="text-xs font-medium text-blue-100">كلما كثر الطلبة المستفيدون زاد المحتوى والفائدة.</p>
+        </div>
+        <button type="button" onclick="shareSite()" class="px-6 py-3 bg-white text-blue-700 font-extrabold rounded-xl text-sm shadow-md hover:bg-blue-50 transition-all">📤 مشاركة المنصة</button>
       </div>
 
     </main>
@@ -274,7 +409,10 @@
       dailyNote: 'أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.',
       // Contact link for the questions section (Telegram, WhatsApp, email...). Leave empty to hide the button.
       // Examples: 'https://t.me/username'  or  'mailto:you@example.com'
-      contactUrl: ''
+      contactUrl: '',
+      // Expected bac date (YYYY-MM-DD). Not officially confirmed: update it when ONEC announces the schedule.
+      bacDate: '2027-06-07',
+      bacDateNote: 'موعد تقريبي، يُحدَّث عند إعلان الديوان'
     };
 
     // ============ SUBJECT CONTENT ============
@@ -480,6 +618,7 @@
 
     function renderTasks() {
       const tasks = getTasks();
+      if (typeof renderStats === 'function' && document.getElementById('tasksDone')) renderStats();
       if (tasks.length === 0) {
         taskList.innerHTML = `<div class="p-6 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-slate-400 text-xs font-semibold">لا توجد مهام مضافة في جدولك اليومي حالياً. أضف مهامك للبدء!</div>`;
         return;
@@ -523,6 +662,7 @@
       tasks[index].completed = !tasks[index].completed;
       saveTasks(tasks);
       renderTasks();
+      if (tasks[index].completed) markStudied();
     }
 
     function deleteTask(index) {
@@ -532,11 +672,283 @@
       renderTasks();
     }
 
+    // ============ STATS: study days, streak, countdown ============
+    function dayKey(d) {
+      const x = d || new Date();
+      return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+    }
+
+    function markStudied() {
+      const days = readJSON('parkweb_study_days', []);
+      const list = Array.isArray(days) ? days : [];
+      const today = dayKey();
+      if (!list.includes(today)) {
+        list.push(today);
+        writeJSON('parkweb_study_days', list.slice(-400));
+      }
+      renderStats();
+    }
+
+    function computeStreak() {
+      const list = readJSON('parkweb_study_days', []);
+      const set = new Set(Array.isArray(list) ? list : []);
+      const d = new Date();
+      if (!set.has(dayKey(d))) d.setDate(d.getDate() - 1);
+      let streak = 0;
+      while (set.has(dayKey(d))) {
+        streak++;
+        d.setDate(d.getDate() - 1);
+      }
+      return streak;
+    }
+
+    function renderStats() {
+      const tasks = getTasks();
+      const done = tasks.filter(t => t.completed).length;
+      document.getElementById('tasksDone').textContent = done;
+      document.getElementById('tasksTotal').textContent = tasks.length;
+      document.getElementById('tasksBar').style.width = (tasks.length ? Math.round(done / tasks.length * 100) : 0) + '%';
+      document.getElementById('streakDays').textContent = computeStreak();
+
+      const target = new Date(SITE_CONFIG.bacDate + 'T00:00:00');
+      const days = Math.max(0, Math.ceil((target - new Date()) / 86400000));
+      document.getElementById('countdownDays').textContent = isNaN(days) ? '--' : days;
+      document.getElementById('countdownNote').textContent = SITE_CONFIG.bacDateNote || '';
+    }
+
+    // ============ QUOTE OF THE DAY ============
+    const QUOTES = [
+      { t: 'النجاح لا يأتي صدفة، بل هو نتيجة أيام صغيرة من الجهد المتواصل.' },
+      { t: 'ابدأ من حيث أنت، بما لديك، وافعل ما تستطيع اليوم.' },
+      { t: 'كل ساعة مراجعة اليوم تخفّف عنك قلق الغد.' },
+      { t: 'لا تقارن تقدّمك بتقدّم غيرك، قارن نفسك بنفسك بالأمس.' },
+      { t: 'الخطأ في التمرين درس مجاني، والخطأ في الامتحان درس مكلف. أخطئ الآن وتعلّم.' },
+      { t: 'التعب مؤقت، والفخر بما أنجزت يبقى.' },
+      { t: 'الانضباط أن تفعل ما يجب فعله حتى حين لا ترغب.' },
+      { t: 'خطوة صغيرة كل يوم أفضل من قفزة كبيرة لا تتكرر.' },
+      { t: 'ثق بنفسك، فقد وصلت إلى هنا بجهدك.' },
+      { t: 'الراحة جزء من المراجعة، فاسترح لتواصل.' },
+      { t: 'ما تزرعه اليوم من اجتهاد تحصده يوم النتيجة.' },
+      { t: 'لا تؤجّل درس اليوم إلى الغد، فللغد دروسه.' },
+      { t: 'الصبر والمثابرة يصنعان ما لا تصنعه الموهبة وحدها.' },
+      { t: 'اجعل هدفك أمام عينيك، وتحرّك نحوه كل صباح.' }
+    ];
+
+    function renderQuote() {
+      const start = new Date(new Date().getFullYear(), 0, 0);
+      const dayOfYear = Math.floor((new Date() - start) / 86400000);
+      document.getElementById('quoteText').textContent = QUOTES[dayOfYear % QUOTES.length].t;
+    }
+
+    // ============ POMODORO ============
+    const pomo = { mode: 'focus', minutes: 25, remaining: 25 * 60, endAt: 0, timer: null, running: false };
+    const pomoDisplay = document.getElementById('pomoDisplay');
+    const pomoStatus = document.getElementById('pomoStatus');
+    const pomoToggle = document.getElementById('pomoToggle');
+    const pomoCount = document.getElementById('pomoCount');
+    const BASE_TITLE = document.title;
+
+    function fmtTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function pomoRender() {
+      pomoDisplay.textContent = fmtTime(pomo.remaining);
+      document.title = pomo.running ? `${fmtTime(pomo.remaining)} · ${BASE_TITLE}` : BASE_TITLE;
+    }
+
+    function pomoSelect(mode, minutes) {
+      pomoStop();
+      pomo.mode = mode;
+      pomo.minutes = minutes;
+      pomo.remaining = minutes * 60;
+      pomoStatus.textContent = mode === 'focus' ? 'جاهز للتركيز' : 'جاهز للراحة';
+      document.querySelectorAll('.pomo-mode').forEach(b => {
+        const active = b.dataset.mode === mode && Number(b.dataset.min) === minutes;
+        b.classList.toggle('bg-rose-600', active);
+        b.classList.toggle('text-white', active);
+        b.classList.toggle('border-rose-600', active);
+      });
+      pomoRender();
+    }
+
+    function pomoStop() {
+      clearInterval(pomo.timer);
+      pomo.timer = null;
+      pomo.running = false;
+      pomoToggle.textContent = 'ابدأ';
+    }
+
+    function pomoTick() {
+      pomo.remaining = Math.max(0, Math.round((pomo.endAt - Date.now()) / 1000));
+      pomoRender();
+      if (pomo.remaining <= 0) pomoFinish();
+    }
+
+    function beep() {
+      try {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new Ctx();
+        const osc = ctx.createOscillator();
+        osc.frequency.value = 880;
+        osc.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.6);
+      } catch (e) { /* audio not available */ }
+      try { if (navigator.vibrate) navigator.vibrate([300, 150, 300]); } catch (e) {}
+    }
+
+    function pomoFinish() {
+      pomoStop();
+      beep();
+      if (pomo.mode === 'focus') {
+        const saved = readJSON('parkweb_pomo', {});
+        const count = (saved.date === dayKey() ? saved.count : 0) + 1;
+        writeJSON('parkweb_pomo', { date: dayKey(), count });
+        pomoCountRender();
+        markStudied();
+        pomoStatus.textContent = '🎉 أحسنت! أنهيت جلسة تركيز. خذ استراحة.';
+      } else {
+        pomoStatus.textContent = 'انتهت الراحة. هيا إلى جلسة جديدة!';
+      }
+      pomo.remaining = pomo.minutes * 60;
+      pomoRender();
+    }
+
+    function pomoCountRender() {
+      const saved = readJSON('parkweb_pomo', {});
+      pomoCount.textContent = saved.date === dayKey() ? (saved.count || 0) : 0;
+    }
+
+    pomoToggle.addEventListener('click', () => {
+      if (pomo.running) {
+        pomoStop();
+        pomoStatus.textContent = 'متوقف مؤقتاً';
+        pomoRender();
+        return;
+      }
+      if (pomo.remaining <= 0) pomo.remaining = pomo.minutes * 60;
+      pomo.endAt = Date.now() + pomo.remaining * 1000;
+      pomo.running = true;
+      pomoToggle.textContent = 'إيقاف مؤقت';
+      pomoStatus.textContent = pomo.mode === 'focus' ? '📚 ركّز الآن...' : '☕ استرح قليلاً...';
+      pomo.timer = setInterval(pomoTick, 500);
+      pomoTick();
+    });
+
+    document.getElementById('pomoReset').addEventListener('click', () => pomoSelect(pomo.mode, pomo.minutes));
+    document.querySelectorAll('.pomo-mode').forEach(b => {
+      b.addEventListener('click', () => pomoSelect(b.dataset.mode, Number(b.dataset.min)));
+    });
+
+    // ============ AVERAGE CALCULATOR ============
+    // c = coefficient (null = not preset, enter yours from the official circular)
+    const GRADE_PRESETS = {
+      sciences: [
+        { n: 'علوم الطبيعة والحياة', c: 5 }, { n: 'العلوم الفيزيائية', c: 5 }, { n: 'الرياضيات', c: 5 },
+        { n: 'اللغة العربية وآدابها', c: 3 }, { n: 'الفلسفة', c: 2 }, { n: 'التاريخ والجغرافيا', c: 2 },
+        { n: 'العلوم الإسلامية', c: 2 }, { n: 'اللغة الفرنسية', c: 2 }, { n: 'اللغة الإنجليزية', c: 2 }
+      ],
+      math: [
+        { n: 'الرياضيات', c: 7 }, { n: 'العلوم الفيزيائية', c: 6 }, { n: 'علوم الطبيعة والحياة', c: 2 },
+        { n: 'اللغة العربية وآدابها', c: 3 }, { n: 'الفلسفة', c: 2 }, { n: 'التاريخ والجغرافيا', c: 2 },
+        { n: 'العلوم الإسلامية', c: 2 }, { n: 'اللغة الفرنسية', c: 2 }, { n: 'اللغة الإنجليزية', c: 2 }
+      ],
+      tech: [
+        { n: 'الرياضيات', c: null }, { n: 'العلوم الفيزيائية', c: null }, { n: 'التكنولوجيا (الهندسة)', c: null },
+        { n: 'اللغة العربية وآدابها', c: null }, { n: 'الفلسفة', c: null }, { n: 'التاريخ والجغرافيا', c: null },
+        { n: 'العلوم الإسلامية', c: null }, { n: 'اللغة الفرنسية', c: null }, { n: 'اللغة الإنجليزية', c: null }
+      ],
+      mgmt: [
+        { n: 'الرياضيات', c: null }, { n: 'التسيير المحاسبي والمالي', c: null }, { n: 'الاقتصاد والمناجمنت', c: null },
+        { n: 'القانون', c: null }, { n: 'اللغة العربية وآدابها', c: null }, { n: 'الفلسفة', c: null },
+        { n: 'التاريخ والجغرافيا', c: null }, { n: 'العلوم الإسلامية', c: null },
+        { n: 'اللغة الفرنسية', c: null }, { n: 'اللغة الإنجليزية', c: null }
+      ],
+      lit: [
+        { n: 'اللغة العربية وآدابها', c: null }, { n: 'الفلسفة', c: null }, { n: 'التاريخ والجغرافيا', c: null },
+        { n: 'اللغة الفرنسية', c: null }, { n: 'اللغة الإنجليزية', c: null }, { n: 'الرياضيات', c: null },
+        { n: 'العلوم الإسلامية', c: null }
+      ],
+      lang: [
+        { n: 'اللغة العربية وآدابها', c: null }, { n: 'الفلسفة', c: null }, { n: 'اللغة الإنجليزية', c: null },
+        { n: 'اللغة الفرنسية', c: null }, { n: 'لغة أجنبية ثالثة', c: null }, { n: 'التاريخ والجغرافيا', c: null },
+        { n: 'الرياضيات', c: null }, { n: 'العلوم الإسلامية', c: null }
+      ]
+    };
+
+    const gradeStream = document.getElementById('gradeStream');
+    const gradeRows = document.getElementById('gradeRows');
+    const gradeResult = document.getElementById('gradeResult');
+    const gradeNote = document.getElementById('gradeNote');
+
+    function renderGradeRows() {
+      const preset = GRADE_PRESETS[gradeStream.value] || [];
+      gradeRows.innerHTML = preset.map(row => `
+        <div class="grid grid-cols-[1fr_4.5rem_4.5rem] gap-2 items-center">
+          <span class="text-xs font-bold text-slate-700">${esc(row.n)}</span>
+          <input type="number" inputmode="decimal" min="0" max="20" step="0.25" placeholder="/20" aria-label="العلامة" class="grade-mark w-full px-2 py-2 rounded-lg border border-slate-200 text-xs text-center bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-600">
+          <input type="number" inputmode="numeric" min="1" max="10" step="1" placeholder="معامل" aria-label="المعامل" value="${row.c === null ? '' : row.c}" class="grade-coef w-full px-2 py-2 rounded-lg border border-slate-200 text-xs text-center bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-600">
+        </div>`).join('');
+      const hasPreset = preset.some(r => r.c !== null);
+      gradeNote.textContent = hasPreset
+        ? 'المعاملات المعبّأة مسبقاً للتقريب، تأكد منها من المنشور الرسمي لوزارة التربية.'
+        : 'أدخل معامل كل مادة حسب المنشور الرسمي لوزارة التربية الوطنية.';
+      gradeResult.textContent = '';
+    }
+
+    function calcAverage() {
+      const marks = gradeRows.querySelectorAll('.grade-mark');
+      const coefs = gradeRows.querySelectorAll('.grade-coef');
+      let sum = 0, total = 0;
+      marks.forEach((m, i) => {
+        const mark = parseFloat(m.value);
+        const coef = parseFloat(coefs[i].value);
+        if (!isNaN(mark) && !isNaN(coef) && mark >= 0 && mark <= 20 && coef > 0) {
+          sum += mark * coef;
+          total += coef;
+        }
+      });
+      if (!total) {
+        gradeResult.textContent = 'أدخل العلامات والمعاملات أولاً.';
+        return;
+      }
+      const avg = sum / total;
+      gradeResult.textContent = `المعدل: ${avg.toFixed(2)} / 20 ${avg >= 10 ? '✅' : '⚠️'}`;
+    }
+
+    gradeStream.addEventListener('change', renderGradeRows);
+    document.getElementById('gradeCalc').addEventListener('click', calcAverage);
+
+    // ============ SHARE ============
+    function shareSite() {
+      const url = location.href.split('#')[0];
+      const text = 'منصة Parkweb Education لطلبة البكالوريا: مواضيع وحلول، جدول يومي، مؤقت تركيز وحاسبة معدل.';
+      if (navigator.share) {
+        navigator.share({ title: 'Parkweb Education', text, url }).catch(() => {});
+      } else {
+        window.open('https://wa.me/?text=' + encodeURIComponent(text + ' ' + url), '_blank', 'noopener');
+      }
+    }
+
+    function clearCompleted() {
+      const tasks = getTasks().filter(t => !t.completed);
+      saveTasks(tasks);
+      renderTasks();
+    }
+
     // ============ INIT ============
     document.addEventListener('DOMContentLoaded', () => {
       checkAuth();
       loadAdminNote();
       renderTasks();
+      renderQuote();
+      renderGradeRows();
+      pomoSelect('focus', 25);
+      pomoCountRender();
+      renderStats();
     });
   </script>
 </body>
