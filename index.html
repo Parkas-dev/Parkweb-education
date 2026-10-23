@@ -287,6 +287,48 @@
     // },
     const RESOURCES = {};
 
+    // ---- Auto-generated exam links (source: eddirasa.com, per stream and year) ----
+    const EXAMS_BASE = 'https://eddirasa.com/ens-sec/3as/bac-solutions/';
+    const EXAM_YEARS = [2026, 2025];
+    const STREAM_NAMES = {
+      'mathematics': 'شعبة رياضيات',
+      'sciences': 'شعبة علوم تجريبية',
+      'technical-mathematics': 'شعبة تقني رياضي',
+      'management-economics': 'شعبة تسيير واقتصاد',
+      'literature-philosophy': 'شعبة آداب وفلسفة',
+      'foreign-languages': 'شعبة لغات أجنبية'
+    };
+    const ALL_STREAMS = Object.keys(STREAM_NAMES);
+
+    // name = subject title without emoji (as written in the buttons above)
+    const SUBJECT_STREAMS = [
+      { name: 'مادة الرياضيات', streams: ['mathematics', 'sciences', 'technical-mathematics', 'management-economics'] },
+      { name: 'مادة العلوم الفيزيائية', streams: ['mathematics', 'sciences', 'technical-mathematics'] },
+      { name: 'علوم الطبيعة والحياة', streams: ['sciences'] },
+      { name: 'الهندسة الميكانيكية', streams: ['technical-mathematics'] },
+      { name: 'الهندسة الكهربائية', streams: ['technical-mathematics'] },
+      { name: 'الهندسة المدنية', streams: ['technical-mathematics'] },
+      { name: 'هندسة الطرائق', streams: ['technical-mathematics'] },
+      { name: 'اللغة العربية وآدابها', streams: ALL_STREAMS },
+      { name: 'مادة الفلسفة', streams: ALL_STREAMS },
+      { name: 'التاريخ والجغرافيا', streams: ALL_STREAMS },
+      { name: 'اللغة الإنجليزية', streams: ALL_STREAMS },
+      { name: 'اللغة الفرنسية', streams: ALL_STREAMS }
+    ];
+
+    function subjectKey(title) {
+      return String(title).replace(/[^؀-ۿ\s]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function autoExams(title) {
+      const entry = SUBJECT_STREAMS.find(x => x.name === subjectKey(title));
+      if (!entry) return [];
+      return EXAM_YEARS.flatMap(year => entry.streams.map(stream => ({
+        title: `بكالوريا ${year} - ${STREAM_NAMES[stream]}`,
+        url: `${EXAMS_BASE}bac-${year}/${stream}/`
+      })));
+    }
+
     const SECTIONS = [
       { key: 'exams',     icon: '📂', title: 'مواضيع البكالوريا المقترحة', box: 'bg-blue-50/50 border-blue-100',       head: 'text-blue-900' },
       { key: 'exercises', icon: '⚡', title: 'التمارين والتدريبات',         box: 'bg-amber-50/50 border-amber-100',     head: 'text-amber-900' },
@@ -377,7 +419,8 @@
     function renderSections(title) {
       const data = RESOURCES[title] || {};
       modalSections.innerHTML = SECTIONS.map(section => {
-        const items = Array.isArray(data[section.key]) ? data[section.key] : [];
+        let items = Array.isArray(data[section.key]) ? data[section.key] : [];
+        if (section.key === 'exams') items = items.concat(autoExams(title));
         const body = items.length
           ? `<ul class="space-y-2">${items.map(item => `
               <li>
