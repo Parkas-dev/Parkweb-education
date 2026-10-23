@@ -397,7 +397,7 @@
       <div class="p-5 mt-5 bg-purple-50/50 rounded-2xl border border-purple-100">
         <h4 class="font-extrabold text-purple-900 text-sm mb-2 flex items-center gap-2"><span>❓</span> الأسئلة والاستفسارات</h4>
         <p id="contactText" class="text-slate-600 text-xs leading-relaxed">سيتم تفعيل هذه الخاصية قريباً.</p>
-        <a id="contactLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden mt-3 inline-block px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold hover:bg-purple-700 transition-all">تواصل معنا</a>
+        <a id="contactLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden mt-3 inline-block px-4 py-2 bg-purple-600 text-white rounded-xl text-xs font-bold hover:bg-purple-700 transition-all">✈️ انضم إلى مجموعة تيليغرام</a>
       </div>
     </div>
   </div>
@@ -408,9 +408,9 @@
     const SITE_CONFIG = {
       // Daily note: shown to all students after you publish the change
       dailyNote: 'أهلاً بك في منصتك اليومية. استمر في التركيز، والعمل بجد، سأكون معك في كل يوم خلال هذا العام الأهم في مسيرتك الدراسية.',
-      // Contact link for the questions section (Telegram, WhatsApp, email...). Leave empty to hide the button.
+      // Telegram group invite link for the questions section. Leave empty to hide the button.
       // Examples: 'https://t.me/username'  or  'mailto:you@example.com'
-      contactUrl: '',
+      contactUrl: 'https://t.me/+dRu_SpPtGCw2MTdk',
       // Expected bac date (YYYY-MM-DD). Not officially confirmed: update it when ONEC announces the schedule.
       bacDate: '2027-06-07',
       bacDateNote: 'موعد تقريبي، يُحدَّث عند إعلان الديوان'
@@ -671,7 +671,7 @@
       if (SITE_CONFIG.contactUrl) {
         contactLink.href = safeUrl(SITE_CONFIG.contactUrl);
         contactLink.classList.remove('hidden');
-        contactText.textContent = 'لديك سؤال حول هذه المادة؟ راسلنا مباشرة.';
+        contactText.textContent = 'لديك سؤال؟ انضم إلى مجموعة تيليغرام الخاصة بالمنصة، واكتب اسم المادة والوحدة ثم سؤالك، وسيجيبك المشرفون والزملاء.';
       } else {
         contactLink.classList.add('hidden');
         contactText.textContent = 'سيتم تفعيل هذه الخاصية قريباً.';
