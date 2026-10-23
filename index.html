@@ -391,6 +391,7 @@
 
       <!-- تُملأ الأقسام من RESOURCES في الأسفل -->
       <div id="modalSections" class="space-y-5"></div>
+      <p class="text-[11px] text-slate-400 mt-4 leading-relaxed">الروابط تفتح مواقع خارجية: التمارين والملخصات من حقيبة عقبة بن نافع (okba.bac-feljib.com) ومواضيع البكالوريا من eddirasa.com. المحتوى لأصحابه.</p>
 
       <!-- قسم الأسئلة: يظهر زر التواصل فقط إذا ضبطت SITE_CONFIG.contactUrl -->
       <div class="p-5 mt-5 bg-purple-50/50 rounded-2xl border border-purple-100">
@@ -424,6 +425,98 @@
     //   tips:      [{ title: 'حيلة دراسة الدالة', url: 'https://...' }]
     // },
     const RESOURCES = {};
+
+    // ---- Exercises / ideas / summaries: Okba Ben Nafaa bag (okba.bac-feljib.com) ----
+    const OKBA = 'https://okba.bac-feljib.com/';
+    const OKBA_LIST = [
+      { name: 'مادة الرياضيات',
+        exercises: [
+          { title: 'وحدة الدوال العددية: تمارين مع الحل (2025)', url: OKBA + '2024/10/dawal-serie-exos-math-bac-okba.html' },
+          { title: 'الدوال العددية: كراس الأستاذ نور الدين', url: OKBA + '2023/11/resume-function-math-bac-okba-nouredine.html' },
+          { title: 'الدوال اللوغاريتمية: كراس الأستاذ نور الدين', url: OKBA + '2023/11/resume-nouredine-math-function-ln-bac-okba.html' },
+          { title: 'المتتاليات العددية: كراس الأستاذ نور الدين', url: OKBA + '2023/11/resume-numerical-sequences-math-bac-okba-nouredine.html' },
+          { title: 'الاحتمالات: كراس الأستاذ نور الدين', url: OKBA + '2023/11/resume-math-probability-bac-okba-nouredine.html' },
+          { title: '10 اختبارات تحضيرية مع التصحيح: علوم تجريبية', url: OKBA + '2024/02/bac-exams-math-fasl-2-science.html' },
+          { title: '7 اختبارات تحضيرية مع التصحيح: رياضيات', url: OKBA + '2024/02/bac-exams-math-fasl-2-mathtech_01876488856.html' },
+          { title: '6 اختبارات تحضيرية مع التصحيح: تقني رياضي', url: OKBA + '2024/02/bac-exams-math-fasl-2-mathtech.html' }
+        ],
+        tips: [
+          { title: '59 فكرة ذهبية في الرياضيات مع الحل', url: OKBA + '2024/10/blog-post_29.html' },
+          { title: 'ملخص درس الدوال: النهايات، الاشتقاقية، الاستمرارية', url: OKBA + '2024/10/dawal-base-.html' },
+          { title: 'مراجعة المكتسبات القبلية', url: OKBA + '2024/10/moktasabat-math.html' }
+        ] },
+      { name: 'مادة العلوم الفيزيائية',
+        exercises: [
+          { title: 'وحدة المتابعة الزمنية لتحول كيميائي: سلسلة تمارين', url: OKBA + '2024/10/blog-post_886.html' },
+          { title: 'انتشار الموجات: 17 موضوعاً مع الحل المفصل', url: 'https://eddirasa.com/باقة-17-موضوع-مع-الحل-المفصل-في-الفيزياء/' },
+          { title: '21 اختباراً تحضيرياً للفصل الثاني مع التصحيح', url: OKBA + '2024/02/bac-exams-fasl-2-physic.html' }
+        ],
+        tips: [
+          { title: 'ملخص شامل لجميع الوحدات (من 1 إلى 7)', url: OKBA + '2023/11/resume-physique-3as-bac-okba.html' },
+          { title: 'ملخص وحدة المتابعة الزمنية لتحول كيميائي', url: OKBA + '2024/10/3-2025.html' },
+          { title: 'أهم الوحدات والتحويلات', url: OKBA + '2024/10/tahwilat-unite-physic-bac-okba.html' }
+        ] },
+      { name: 'علوم الطبيعة والحياة',
+        exercises: [
+          { title: '20 اختباراً مع الحل للفصل الثاني: علوم تجريبية', url: OKBA + '2024/02/20-exams-science-ba.html' }
+        ],
+        tips: [
+          { title: 'ملخص وحدة تركيب البروتين', url: OKBA + '2024/10/blog-post.html' },
+          { title: 'منهجية الإجابة: الأستاذة كتفي شريف زينة', url: OKBA + '2023/11/minhajiya-science-ketfi-bac-okba.html' },
+          { title: 'مراجعة المكتسبات القبلية', url: OKBA + '2024/09/moktasabat-kibaliya-science.html' }
+        ] },
+      { name: 'الهندسة الميكانيكية',
+        tips: [ { title: 'التدرج السنوي (البرنامج)', url: OKBA + '2023/11/programme-3as-genie-mecanique-bac-okba.html' } ] },
+      { name: 'الهندسة الكهربائية',
+        tips: [ { title: 'التدرج السنوي (البرنامج)', url: OKBA + '2023/11/programme-3as-genie-electric.html' } ] },
+      { name: 'الهندسة المدنية',
+        tips: [ { title: 'التدرج السنوي (البرنامج)', url: OKBA + '2023/11/programme-3as-genie-civile-bac-okba.html' } ] },
+      { name: 'هندسة الطرائق',
+        tips: [ { title: 'التدرج السنوي (البرنامج)', url: OKBA + '2023/11/programme-3as-genie-de-procede-bac-okba.html' } ] },
+      { name: 'اللغة العربية وآدابها',
+        tips: [
+          { title: 'أفضل ملخص شامل', url: OKBA + '2023/11/arabe-resume-3as-bac.html' },
+          { title: 'ملخص الأستاذ حيقون أسامة', url: OKBA + '2024/03/haigoun-arab-bac-okba.html' },
+          { title: 'كتاب المراجعة النهائية', url: OKBA + '2024/03/kitab-morajaa-nihaiya-bac-okba-arabe.html' },
+          { title: 'برنامج المادة (الشعب العلمية)', url: OKBA + '2023/11/programe-bac-arabe-3as.html' }
+        ] },
+      { name: 'مادة الفلسفة',
+        tips: [
+          { title: 'التدرج السنوي: علوم تجريبية ورياضيات', url: OKBA + '2023/11/programme-bac-phylo-3as.html' },
+          { title: 'التدرج السنوي: تقني رياضي وتسيير واقتصاد', url: OKBA + '2023/11/phylo-programme-bac-3as.html' }
+        ] },
+      { name: 'التاريخ والجغرافيا',
+        tips: [
+          { title: 'ملخص الأستاذ بورنان عمار', url: OKBA + '2023/11/blog-post_29.html' },
+          { title: 'المصفوفة الشاملة', url: OKBA + '2023/11/masfoufa-chamila-histoire-geo-bac-3as.html' },
+          { title: 'خرائط المادة', url: OKBA + '2023/11/histoire-geo-maps-bac-3as.html' },
+          { title: 'برنامج التاريخ', url: OKBA + '2023/11/programme-histoire-bac-3as.html' },
+          { title: 'برنامج الجغرافيا', url: OKBA + '2023/11/programe-geography-bac-3as.html' }
+        ] },
+      { name: 'اللغة الإنجليزية',
+        exercises: [
+          { title: 'موضوع بكالوريا تجريبي 1 مع الحل', url: OKBA + '2025/05/english-01-2025.html' },
+          { title: 'موضوع بكالوريا تجريبي 2 مع الحل', url: OKBA + '2025/05/english-02-2025.html' },
+          { title: 'موضوع بكالوريا تجريبي 3 مع الحل', url: OKBA + '2025/05/english-03-2025.html' },
+          { title: 'موضوع بكالوريا تجريبي 4 مع الحل', url: OKBA + '2025/05/english-04-2025.html' },
+          { title: 'موضوع بكالوريا تجريبي 5 مع الحل', url: OKBA + '2025/05/english-05-2025.html' }
+        ],
+        tips: [
+          { title: 'ملخص شامل لجميع الدروس', url: OKBA + '2023/11/resume-englaish-bac-okba.html' },
+          { title: 'مصطلحات مشروحة بالعربية', url: OKBA + '2024/03/mostalahat-englaish-bac-okba.html' },
+          { title: 'فقرات جاهزة للتعبير الكتابي', url: OKBA + '2024/03/paragraph-englaish-ba-okba-3as.html' },
+          { title: 'كتاب المراجعة النهائية', url: OKBA + '2023/11/book-revision-bac-okba-3as.html' }
+        ] },
+      { name: 'اللغة الفرنسية',
+        tips: [
+          { title: 'المختصر المفيد (الشعب العلمية)', url: OKBA + '2023/11/resume-francais-3as-bac.html' },
+          { title: 'المختصر المفيد في القواعد', url: OKBA + '2023/11/grammar-francais-3as-bac-okba.html' },
+          { title: 'كتاب المراجعة النهائية', url: OKBA + '2023/11/final-revision-francais-bac-okb-3as.html' }
+        ] }
+    ];
+    OKBA_LIST.forEach(item => {
+      RESOURCES[item.name] = { exams: item.exams || [], exercises: item.exercises || [], tips: item.tips || [] };
+    });
 
     // ---- Auto-generated exam links (source: eddirasa.com, per stream and year) ----
     const EXAMS_BASE = 'https://eddirasa.com/ens-sec/3as/bac-solutions/';
@@ -555,7 +648,7 @@
     const contactLink = document.getElementById('contactLink');
 
     function renderSections(title) {
-      const data = RESOURCES[title] || {};
+      const data = RESOURCES[subjectKey(title)] || RESOURCES[title] || {};
       modalSections.innerHTML = SECTIONS.map(section => {
         let items = Array.isArray(data[section.key]) ? data[section.key] : [];
         if (section.key === 'exams') items = items.concat(autoExams(title));
